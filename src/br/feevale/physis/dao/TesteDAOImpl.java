@@ -9,9 +9,28 @@ import java.util.List;
 import br.feevale.physis.dao.generic.GenericDAOImpl;
 import br.feevale.physis.model.Pessoa;
 
-public class PessoaDAO extends GenericDAOImpl<Pessoa>{
-	
-	public List<Pessoa> getList() {
+public class TesteDAOImpl extends GenericDAOImpl<Pessoa> implements TesteDAO {
+
+	@Override
+	public Integer save(Pessoa bean) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(Pessoa bean) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Pessoa get(Integer id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pessoa> listAll() throws SQLException {
 		try {
 			PreparedStatement stm = executeQuery("SELECT * FROM pessoas");
 			ResultSet rs = stm.getResultSet();
@@ -38,33 +57,9 @@ public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 	}
 
 	@Override
-	public Integer save(Pessoa bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean delete(Pessoa bean) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Pessoa get(Integer id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Pessoa> listAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Pessoa> queryByExample(Pessoa example) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 }

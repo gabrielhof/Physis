@@ -1,8 +1,6 @@
 package br.feevale.physis.model;
 
-import java.io.Serializable;
-
-public class Pessoa implements Serializable {
+public class Pessoa extends Bean {
 
 	private static final long serialVersionUID = 5244070687230420960L;
 	

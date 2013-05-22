@@ -6,11 +6,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Vamos implementar algo legal?</title>
 		
-		<link href="assets/css/style.css" rel="stylesheet"/>
+		<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<jsp:useBean id="dao" class="org.teste.dao.PessoaDAO"></jsp:useBean>
-		
 	    <div class="container-narrow">
 			<div class="masthead">
 				<ul class="nav nav-pills pull-right">
@@ -38,13 +36,26 @@
 					</tr>
 				</thead>
 				<tbody>
-	    			<c:forEach var="pessoa" items="${dao.list}">
-	    				<tr>
-	    					<td>${pessoa.id}</td>
-	    					<td>${pessoa.name}</td>
-	    					<td>${pessoa.age}</td>
-	    				</tr>
-	    			</c:forEach>
+    				<tr>
+    					<td>1</td>
+    					<td>Gabriel</td>
+    					<td>19</td>
+    				</tr>
+    				<tr>
+    					<td>2</td>
+    					<td>Chico Science</td>
+    					<td>50</td>
+    				</tr>
+    				<tr>
+    					<td>3</td>
+    					<td>David Grohl</td>
+    					<td>44</td>
+    				</tr>
+    				<tr>
+    					<td>4</td>
+    					<td>MC Federado</td>
+    					<td>5</td>
+    				</tr>
 	    		</tbody>
 	    	</table>
 	    	

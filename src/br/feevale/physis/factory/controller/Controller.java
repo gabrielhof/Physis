@@ -1,28 +1,36 @@
 package br.feevale.physis.factory.controller;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.exception.ActionNotFoundException;
 import br.feevale.physis.exception.ControllerNotFoundException;
+import br.feevale.physis.factory.resource.ResourceInjectorFactory;
+import br.feevale.physis.factory.resource.ResourceInjectorFactoryImpl;
+import br.feevale.physis.injector.ResourceInjector;
+import br.feevale.physis.util.ReflectionUtils;
 import br.feevale.physis.util.StringUtils;
 
 
 public class Controller {
 
-	private static String CONTROLLER_PACKAGE = "org.teste.controller.";
+	private static final ResourceInjectorFactory injectorFactory = new ResourceInjectorFactoryImpl();
+	
+	private static String CONTROLLER_PACKAGE = "br.feevale.physis.controller.";
 	private static String CONTROLLER_SUFFIX = "Controller";
 	private static String ACTION_SUFFIX = "Action";
 	
 	private Class<?> controllerClass;
 	private DefaultController controller;
 	
-	private Map<String, Method> actions;
+	private Map<String, Method> actions = new HashMap<String, Method>();
 	
 	public Controller(String controller) throws ControllerNotFoundException {
 		if (StringUtils.isBlank(controller)) {
@@ -40,10 +48,25 @@ public class Controller {
 			
 			this.controller = (DefaultController) controllerClass.newInstance();
 			
-			this.actions = new HashMap<String, Method>();
+			injectDependencies();
 		} catch (Exception e) {
 			throw new ControllerNotFoundException(controller, e);
 		}
+	}
+	
+	protected void injectDependencies() {
+		Field fields[] = ReflectionUtils.getAnnotatedFields(controllerClass, Resource.class);
+		
+		if (fields != null) {
+			for (Field field : fields) {
+				ResourceInjector injector = injectorFactory.getInjector(field.getType());
+				
+				if (injector != null) {
+					injector.inject(controller, field);
+				}
+			}
+		}
+		
 	}
 	
 	public void invoke(String action, HttpServletRequest request, HttpServletResponse response) throws ActionNotFoundException {

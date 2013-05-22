@@ -18,14 +18,14 @@ public interface GenericDAO<T extends Bean> {
 	
 	public PreparedStatement executeQuery(String query, List<Object> parameters) throws SQLException;
 	
-	public Integer save(T bean);
+	public Integer save(T bean) throws SQLException;
 	
-	public boolean delete(T bean);
+	public boolean delete(T bean) throws SQLException;
 	
-	public T get(Integer id);
+	public T get(Integer id) throws SQLException;
 	
-	public List<T> listAll();
+	public List<T> listAll() throws SQLException;
 	
-	public List<T> queryByExample(T example);
+	public List<T> queryByExample(T example) throws SQLException;
 	
 }
