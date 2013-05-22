@@ -1,4 +1,4 @@
-package br.feevale.physis.factory.resource;
+package br.feevale.physis.factory.injector;
 
 import java.util.Arrays;
 import java.util.HashMap;
