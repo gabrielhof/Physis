@@ -5,8 +5,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Vamos implementar algo legal?</title>
-		
-		<link href="${pageContext.request.contextPath}/assets/css/style.css" rel="stylesheet"/>
+		<link href="${contextPath}/assets/css/style.css" rel="stylesheet"/>
 	</head>
 	<body>
 	    <div class="container-narrow">
@@ -36,26 +35,15 @@
 					</tr>
 				</thead>
 				<tbody>
-    				<tr>
-    					<td>1</td>
-    					<td>Gabriel</td>
-    					<td>19</td>
-    				</tr>
-    				<tr>
-    					<td>2</td>
-    					<td>Chico Science</td>
-    					<td>50</td>
-    				</tr>
-    				<tr>
-    					<td>3</td>
-    					<td>David Grohl</td>
-    					<td>44</td>
-    				</tr>
-    				<tr>
-    					<td>4</td>
-    					<td>MC Federado</td>
-    					<td>5</td>
-    				</tr>
+					<c:if test="${not empty pessoas}">
+						<c:forEach var="pessoa" items="${pessoas}">
+		    				<tr>
+    							<td>${pessoa.id}</td>
+    							<td>${pessoa.name}</td>
+    							<td>${pessoa.age}</td>
+    						</tr>
+						</c:forEach>
+					</c:if>
 	    		</tbody>
 	    	</table>
 	    	
@@ -66,7 +54,7 @@
 			</div>
 	    </div>
 
-		<script type="text/javascript" src="assets/js/jquery-1.9.1.min.js"></script>	
-		<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>	
+		<script type="text/javascript" src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>	
+		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap.min.js"></script>	
 	</body>
 </html>

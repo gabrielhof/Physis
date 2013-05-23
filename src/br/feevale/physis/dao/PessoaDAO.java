@@ -11,32 +11,6 @@ import br.feevale.physis.model.Pessoa;
 
 public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 	
-	public List<Pessoa> getList() {
-		try {
-			PreparedStatement stm = executeQuery("SELECT * FROM pessoas");
-			ResultSet rs = stm.getResultSet();
-			
-			List<Pessoa> list = new ArrayList<Pessoa>();
-			
-			while (rs.next()) {
-				Pessoa pessoa = new Pessoa();
-				pessoa.setId(rs.getInt("id"));
-				pessoa.setName(rs.getString("name"));
-				pessoa.setAge(rs.getInt("age"));
-				
-				list.add(pessoa);
-			}
-			
-			stm.close();
-			
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-
 	@Override
 	public Integer save(Pessoa bean) throws SQLException {
 		// TODO Auto-generated method stub
@@ -57,8 +31,22 @@ public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 
 	@Override
 	public List<Pessoa> listAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement stm = executeQuery("SELECT * FROM pessoas");
+		ResultSet rs = stm.getResultSet();
+
+		List<Pessoa> list = new ArrayList<Pessoa>();
+
+		while (rs.next()) {
+			Pessoa pessoa = new Pessoa();
+			pessoa.setId(rs.getInt("id"));
+			pessoa.setName(rs.getString("name"));
+			pessoa.setAge(rs.getInt("age"));
+
+			list.add(pessoa);
+		}
+		
+		close(stm);
+		return list;
 	}
 
 	@Override

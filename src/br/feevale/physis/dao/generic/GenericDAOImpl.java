@@ -3,6 +3,7 @@ package br.feevale.physis.dao.generic;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 import br.feevale.physis.exception.InvalidConnectionFactoryException;
@@ -26,6 +27,14 @@ public abstract class GenericDAOImpl<T extends Bean> implements GenericDAO<T> {
 		}
 		
 		return factory.getConnection();
+	}
+	
+	@Override
+	public void close(Statement stm) throws SQLException {
+		Connection conn = stm.getConnection();
+		
+		stm.close();
+		conn.close();
 	}
 	
 	@Override
