@@ -71,7 +71,7 @@ public class Controller {
 	
 	public void invoke(String action, HttpServletRequest request, HttpServletResponse response) throws ActionNotFoundException {
 		if (StringUtils.isBlank(action)) {
-			throw new ActionNotFoundException("Action null or blank.");
+			throw new ActionNotFoundException(controllerClass.toString(), "Action null or blank.");
 		}
 		
 		try {
@@ -91,7 +91,7 @@ public class Controller {
 			
 			actions.get(action).invoke(controller, request, response);
 		} catch (Exception e) {
-			throw new ActionNotFoundException(action, e);
+			throw new ActionNotFoundException(controllerClass.toString(), action, e);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package br.feevale.physis.view;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,13 +15,13 @@ import br.feevale.physis.util.StringUtils;
 
 public class ResponseView implements View {
 
-	private static final String VIEW_FOLDER = "/view";
-	private static final String VIEW_SUFIX = "View";
+	protected static final String VIEW_FOLDER = "/view";
+	protected static final String VIEW_SUFIX = "View";
 	
-	private String controller;
-	private String view;
+	protected String controller;
+	protected String view;
 	
-	private Map<String, Object> variables;
+	protected Map<String, Object> variables;
 	
 	public ResponseView(String controller, String view) throws InvalidViewException {
 		if (StringUtils.isBlank(controller) || StringUtils.isBlank(view)) {
@@ -36,21 +37,47 @@ public class ResponseView implements View {
 		setVariable("contextPath", request.getContextPath());
 	}
 
+	protected void setRequestAttributes(HttpServletRequest request) {
+		Collection<String> variables = getVariables();
+		for (String variable : variables) {
+			request.setAttribute(variable, getVariable(variable));
+		}
+	}
+	
 	@Override
 	public void setVariable(String name, Object value) {
 		variables.put(name, value);
 	}
 	
 	@Override
+	public Object getVariable(String name) {
+		return variables.get(name);
+	}
+	
+	@Override
+	public Collection<String> getVariables() {
+		return variables.keySet();
+	}
+	
+	public String getController() {
+		return controller;
+	}
+	
+	public String getView() {
+		return view;
+	}
+	
+	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		configureDefaultVariables(request);
+		setRequestAttributes(request);
 		
-		for (String variable : variables.keySet()) {
-			request.setAttribute(variable, variables.get(variable));
-		}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(String.format("%s/%s/%s%s.jsp", VIEW_FOLDER, controller, view, VIEW_SUFIX));
+		RequestDispatcher dispatcher = request.getRequestDispatcher(buildUrl(request));
 		dispatcher.forward(request, response);
+	}
+	
+	protected String buildUrl(HttpServletRequest request) {
+		return String.format("%s/%s/%s%s.jsp", VIEW_FOLDER, controller, view, VIEW_SUFIX);
 	}
 	
 }
