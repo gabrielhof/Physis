@@ -12,7 +12,7 @@
 		<link href="${contextPath}/assets/css/index.css" rel="stylesheet"/>
 	</head>
 	<body>
-		<div class="navbar navbar-inverse navbar-static-top">
+		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
 					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -29,7 +29,7 @@
 							<li><a href="#about">About</a></li>
 							<li><a href="#contact">Contact</a></li>
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 								<ul class="dropdown-menu">
 									<li><a href="#">Action</a></li>
 									<li><a href="#">Another action</a></li>
