@@ -2,7 +2,7 @@ package br.feevale.physis.injector;
 
 import java.lang.reflect.Field;
 
-import br.feevale.physis.dao.generic.GenericDAO;
+import br.feevale.physis.dao.GenericDAO;
 import br.feevale.physis.factory.dao.DAOFactory;
 import br.feevale.physis.factory.dao.DAOFactoryImpl;
 import br.feevale.physis.model.Bean;

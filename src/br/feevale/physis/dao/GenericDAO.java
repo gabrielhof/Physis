@@ -1,4 +1,4 @@
-package br.feevale.physis.dao.generic;
+package br.feevale.physis.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -1,6 +1,6 @@
 package br.feevale.physis.factory.dao;
 
-import br.feevale.physis.dao.generic.GenericDAO;
+import br.feevale.physis.dao.GenericDAO;
 import br.feevale.physis.model.Bean;
 
 public interface DAOFactory {

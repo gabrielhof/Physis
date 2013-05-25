@@ -20,7 +20,11 @@ public class TemplateView extends ResponseView {
 	
 	@Override
 	protected String buildUrl(HttpServletRequest request) {
+		return getTemplate();
+	}
+	
+	protected String getTemplate() {
 		return TEMPLATE;
 	}
-
+	
 }

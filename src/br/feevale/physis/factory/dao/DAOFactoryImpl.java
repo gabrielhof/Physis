@@ -4,7 +4,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.feevale.physis.dao.generic.GenericDAO;
+import br.feevale.physis.dao.GenericDAO;
 import br.feevale.physis.factory.connection.ConnectionFactory;
 import br.feevale.physis.factory.connection.DataSourceConnectionFactory;
 import br.feevale.physis.model.Bean;

@@ -1,4 +1,4 @@
-package br.feevale.physis.dao;
+package br.feevale.physis.business.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -6,8 +6,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.feevale.physis.dao.generic.GenericDAOImpl;
-import br.feevale.physis.model.Pessoa;
+import br.feevale.physis.business.model.bean.Pessoa;
+import br.feevale.physis.dao.GenericDAOImpl;
 
 public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 	

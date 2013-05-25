@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.feevale.physis.dao.generic.GenericDAO;
+import br.feevale.physis.dao.GenericDAO;
 import br.feevale.physis.injector.DAOInjector;
 import br.feevale.physis.injector.ResourceInjector;
 import br.feevale.physis.util.CollectionUtils;

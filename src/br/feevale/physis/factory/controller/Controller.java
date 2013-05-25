@@ -15,6 +15,7 @@ import br.feevale.physis.exception.ControllerNotFoundException;
 import br.feevale.physis.factory.injector.ResourceInjectorFactory;
 import br.feevale.physis.factory.injector.ResourceInjectorFactoryImpl;
 import br.feevale.physis.injector.ResourceInjector;
+import br.feevale.physis.settings.ApplicationSettings;
 import br.feevale.physis.util.ReflectionUtils;
 import br.feevale.physis.util.StringUtils;
 
@@ -23,25 +24,23 @@ public class Controller {
 
 	private static final ResourceInjectorFactory injectorFactory = new ResourceInjectorFactoryImpl();
 	
-	private static String CONTROLLER_PACKAGE = "br.feevale.physis.controller.";
-	private static String CONTROLLER_SUFFIX = "Controller";
-	private static String ACTION_SUFFIX = "Action";
-	
 	private Class<?> controllerClass;
 	private DefaultController controller;
 	
 	private Map<String, Method> actions = new HashMap<String, Method>();
+	
+	private ApplicationSettings settings = ApplicationSettings.getInstance();
 	
 	public Controller(String controller) throws ControllerNotFoundException {
 		if (StringUtils.isBlank(controller)) {
 			throw new ControllerNotFoundException("Controller null or blank");
 		}
 		
-		controller = CONTROLLER_PACKAGE + StringUtils.capitalizeFirst(controller);
+		controller = String.format("%s.%s", settings.getControllerPackage(), StringUtils.capitalizeFirst(controller));
 		
 		try {
 			try {
-				this.controllerClass = Class.forName(controller + CONTROLLER_SUFFIX);
+				this.controllerClass = Class.forName(controller + settings.getControllerSuffix());
 			} catch (Exception e) {
 				this.controllerClass = Class.forName(controller);
 			}
@@ -81,7 +80,7 @@ public class Controller {
 				Method method = null;
 				
 				try {
-					method = controllerClass.getDeclaredMethod(action + ACTION_SUFFIX, HttpServletRequest.class, HttpServletResponse.class);
+					method = controllerClass.getDeclaredMethod(action + settings.getActionSuffix(), HttpServletRequest.class, HttpServletResponse.class);
 				} catch (Exception e) {
 					method = controllerClass.getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
 				}
@@ -94,5 +93,4 @@ public class Controller {
 			throw new ActionNotFoundException(controllerClass.toString(), action, e);
 		}
 	}
-	
 }

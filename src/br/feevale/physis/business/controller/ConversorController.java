@@ -1,11 +1,12 @@
-package br.feevale.physis.controller;
+package br.feevale.physis.business.controller;
 
 import java.text.DecimalFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.feevale.physis.enums.Moedas;
+import br.feevale.physis.business.model.enums.Moedas;
+import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.util.DecimalUtils;
 
 public class ConversorController implements DefaultController {

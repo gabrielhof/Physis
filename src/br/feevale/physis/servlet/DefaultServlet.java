@@ -2,6 +2,7 @@ package br.feevale.physis.servlet;
 
 import java.io.IOException;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.feevale.physis.factory.controller.Controller;
 import br.feevale.physis.factory.controller.ControllerFactory;
 import br.feevale.physis.factory.controller.ControllerFactoryImpl;
-import br.feevale.physis.util.StringUtils;
+import br.feevale.physis.settings.ApplicationSettings;
 
 @SuppressWarnings("serial")
 public class DefaultServlet extends HttpServlet {
@@ -18,8 +19,9 @@ public class DefaultServlet extends HttpServlet {
 	private ControllerFactory controllerFactory;
 	
 	@Override
-	public void init() throws ServletException {
+	public void init(ServletConfig config) throws ServletException {
 		this.controllerFactory = new ControllerFactoryImpl();
+		ApplicationSettings.getInstance().setSettings(config);
 	}
 	
 	@Override
@@ -42,15 +44,14 @@ public class DefaultServlet extends HttpServlet {
 				controllerName = url[3];
 			} else if (url.length > 4) {
 				controllerName = url[url.length-2];
-			}
-			
-			if (StringUtils.isBlank(controllerName)) {
-				String requestURI = request.getRequestURI().replaceFirst("/$", "");
-				response.sendRedirect(requestURI + "/index/");
-				return;
+			} else {
+				controllerName = "index";
 			}
 			
 			String action = url.length > 4 ? url[url.length-1] : "index";
+			
+			request.setAttribute("controller", controllerName);
+			request.setAttribute("action", action);
 			
 			Controller controller = controllerFactory.create(controllerName);
 			controller.invoke(action, request, response);

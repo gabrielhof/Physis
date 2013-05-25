@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <div class="container-narrow">
 	<div class="masthead">
 		<ul class="nav nav-pills pull-right">
@@ -12,10 +13,8 @@
 
 	<div class="jumbotron">
 		<h1>Projeto dahora!</h1>
-		<p class="lead">Um texto muito foda que vai te convencer que esse
-			site é muito foda.</p>
-		<a class="btn btn-large btn-success" href="#">Um botão que faz
-			algo</a>
+		<p class="lead">Um texto muito foda que vai te convencer que esse site é muito foda.</p>
+		<a class="btn btn-large btn-success" href="#">Um botão que faz algo</a>
 	</div>
 
 	<hr />

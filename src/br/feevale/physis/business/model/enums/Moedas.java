@@ -1,9 +1,9 @@
-package br.feevale.physis.enums;
+package br.feevale.physis.business.model.enums;
 
-import br.feevale.physis.model.moedas.Dolar;
-import br.feevale.physis.model.moedas.Euro;
-import br.feevale.physis.model.moedas.Moeda;
-import br.feevale.physis.model.moedas.Real;
+import br.feevale.physis.business.model.bean.moedas.Dolar;
+import br.feevale.physis.business.model.bean.moedas.Euro;
+import br.feevale.physis.business.model.bean.moedas.Moeda;
+import br.feevale.physis.business.model.bean.moedas.Real;
 
 public enum Moedas {
 

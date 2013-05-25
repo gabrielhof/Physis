@@ -1,9 +1,9 @@
-package br.feevale.physis.model.moedas;
+package br.feevale.physis.business.model.bean.moedas;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import br.feevale.physis.enums.Moedas;
+import br.feevale.physis.business.model.enums.Moedas;
 
 public abstract class AbstractMoeda implements Moeda {
 

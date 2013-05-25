@@ -1,6 +1,6 @@
-package br.feevale.physis.model.moedas;
+package br.feevale.physis.business.model.bean.moedas;
 
-import br.feevale.physis.enums.Moedas;
+import br.feevale.physis.business.model.enums.Moedas;
 
 public class Euro extends AbstractMoeda {
 

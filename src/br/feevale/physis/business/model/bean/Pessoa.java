@@ -1,4 +1,6 @@
-package br.feevale.physis.model;
+package br.feevale.physis.business.model.bean;
+
+import br.feevale.physis.model.Bean;
 
 public class Pessoa extends Bean {
 
