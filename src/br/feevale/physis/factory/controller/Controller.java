@@ -13,7 +13,6 @@ import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.exception.ActionNotFoundException;
 import br.feevale.physis.exception.ControllerNotFoundException;
 import br.feevale.physis.factory.injector.ResourceInjectorFactory;
-import br.feevale.physis.factory.injector.ResourceInjectorFactoryImpl;
 import br.feevale.physis.injector.ResourceInjector;
 import br.feevale.physis.settings.ApplicationSettings;
 import br.feevale.physis.util.ReflectionUtils;
@@ -22,7 +21,7 @@ import br.feevale.physis.util.StringUtils;
 
 public class Controller {
 
-	private static final ResourceInjectorFactory injectorFactory = new ResourceInjectorFactoryImpl();
+	private static final ResourceInjectorFactory injectorFactory = ApplicationSettings.getInstance().getResourceInjectorFactory();
 	
 	private Class<?> controllerClass;
 	private DefaultController controller;

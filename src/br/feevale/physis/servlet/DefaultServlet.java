@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.feevale.physis.factory.controller.Controller;
 import br.feevale.physis.factory.controller.ControllerFactory;
-import br.feevale.physis.factory.controller.ControllerFactoryImpl;
 import br.feevale.physis.settings.ApplicationSettings;
 
 @SuppressWarnings("serial")
@@ -18,10 +17,12 @@ public class DefaultServlet extends HttpServlet {
 
 	private ControllerFactory controllerFactory;
 	
+	private ApplicationSettings settings = ApplicationSettings.getInstance();
+	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
-		this.controllerFactory = new ControllerFactoryImpl();
-		ApplicationSettings.getInstance().setSettings(config);
+		settings.setSettings(config);
+		this.controllerFactory = settings.getControllerFactory();
 	}
 	
 	@Override

@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.feevale.physis.exception.InvalidViewException;
+import br.feevale.physis.settings.ApplicationSettings;
 import br.feevale.physis.util.StringUtils;
 
 public class ResponseView implements View {
 
-	protected static final String VIEW_FOLDER = "/view";
-	protected static final String VIEW_SUFIX = "View";
+	protected ApplicationSettings settings = ApplicationSettings.getInstance();
 	
 	protected String controller;
 	protected String view;
@@ -77,7 +77,7 @@ public class ResponseView implements View {
 	}
 	
 	protected String buildUrl(HttpServletRequest request) {
-		return String.format("%s/%s/%s%s.jsp", VIEW_FOLDER, controller, view, VIEW_SUFIX);
+		return String.format("%s/%s/%s%s.jsp", settings.getViewFolder(), controller, view, settings.getViewSuffix());
 	}
 	
 }

@@ -54,8 +54,8 @@
 	
 		<jsp:include page="${viewFile}"></jsp:include>
 		
-		<script type="text/javascript" src="${contextPath}/assets/js/jquery/jquery-1.9.1.min.js"></script>	
-		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>	
+		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="${contextPath}/assets/js/application/application.js"></script>
 	</body>
 </html>

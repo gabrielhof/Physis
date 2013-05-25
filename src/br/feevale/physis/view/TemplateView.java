@@ -3,10 +3,11 @@ package br.feevale.physis.view;
 import javax.servlet.http.HttpServletRequest;
 
 import br.feevale.physis.exception.InvalidViewException;
+import br.feevale.physis.settings.ApplicationSettings;
 
 public class TemplateView extends ResponseView {
 
-	protected static final String TEMPLATE = "/template/template.jsp";
+	protected ApplicationSettings settings = ApplicationSettings.getInstance();
 	
 	public TemplateView(String controller, String view) throws InvalidViewException {
 		super(controller, view);
@@ -24,7 +25,7 @@ public class TemplateView extends ResponseView {
 	}
 	
 	protected String getTemplate() {
-		return TEMPLATE;
+		return settings.getTemplateViewFile();
 	}
 	
 }
