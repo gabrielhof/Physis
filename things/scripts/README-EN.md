@@ -1,30 +1,31 @@
-Como Criar Scripts DDL e DML para o Banco de Dados
+How to Create Database DDL and DML Scripts
 =============
 
-Esse padrão deve ser seguido para facilitar o controle da Estrutura e dos Dados do Banco de Dados.
+This is a pattern that must follow to facilitate the control for the Structure and Data of the Database.
 
-Primeiramente, o nome do script deve ser: `yyyy_MM_dd_TABLE_NAME.sql`, aonde:
-* `yyyy` é o ano de criação do script
-* `MM` é o mês
-* `dd` é o dia
-* `TABLE_NAME` é o nome da table de destino do script
+First of all, the name of the script must follow: `yyyy_MM_dd_TABLE_NAME.sql`, where:
+* `yyyy` is the script's year
+* `MM` is the month
+* `dd` is the day
+* `TABLE_NAME` is the script's destination table name 
 
-Após, o conteúdo do arquivo deve ser:
+Second, the file content must follow:
+
 	-- SGDB_NAME
 	SCRIPT
 
-aonde:
-* `SGDB_NAME` é o nome do SGDB, como por exemplo: MySQL, PostgreSQL.
-* `SCRIPT` é script a ser executado, como CREATE TABLE ou INSERT.
+where:
+* `SGDB_NAME` is the SGDB name, like MySQL or PostgreSQL.
+* `SCRIPT` is the script statement, like CREATE TABLE or INSERT.
 
-Para cada SGDB utilizado deve conter um script funcional.
-Atualimente, nós estamos utilizando apenas o MySQL.
+For each SGDB used is must contain a working script.
+Currently, we only use MySQL.
 
-Exemplo:
+Example:
 
-Arquivo: `2013_06_02_PERSONS.sql`
+File: `2013_06_02_PERSONS.sql`
 
-Conteúdo:
+Content:
 
 	-- MySQL
 
