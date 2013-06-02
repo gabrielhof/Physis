@@ -45,7 +45,7 @@
 						<form class="navbar-form pull-right">
 							<input class="input-medium" type="text" placeholder="Usu&aacute;rio" style="height: 16px;">
 							<input class="input-medium" type="password" placeholder="Senha" style="height: 16px;">
-							<button type="submit" class="btn btn-small btn-primary">Entrar</button>
+							<button type="submit" class="btn btn-small btn-danger">Entrar</button>
 						</form>
 					</div>
 				</div>
