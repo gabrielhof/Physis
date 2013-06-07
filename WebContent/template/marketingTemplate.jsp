@@ -26,8 +26,8 @@
 					<div class="nav-collapse collapse">
 						<ul class="nav">
 							<li class="active"><a href="#home">Home</a></li>
-							<li><a href="#about">Saiba mais</a></li>
-							<li><a href="#contact">Contato</a></li>
+							<li class="disabled"><a href="#about">Saiba mais</a></li>
+							<li class="disabled"><a href="#contact">Contato</a></li>
 <!-- 							<li class="dropdown"> -->
 <!-- 								<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a> -->
 <!-- 								<ul class="dropdown-menu"> -->
@@ -42,11 +42,13 @@
 <!-- 							</li> -->
 						</ul>
 						
-						<form class="navbar-form pull-right">
-							<input class="input-medium" type="text" placeholder="Usu&aacute;rio" style="height: 16px;">
-							<input class="input-medium" type="password" placeholder="Senha" style="height: 16px;">
-							<button type="submit" class="btn btn-small btn-danger">Entrar</button>
-						</form>
+						<c:if test="${useLoginBar}">
+							<form class="navbar-form pull-right" method="post" action="${appPath}/login/doLogin">
+								<input id="username" name="username" class="input-medium" type="text" placeholder="Usu&aacute;rio" required="required" style="height: 16px;">
+								<input id="password" name="password" class="input-medium" type="password" placeholder="Senha" required="required" style="height: 16px;">
+								<button type="submit" class="btn btn-small btn-danger">Entrar</button>
+							</form>
+						</c:if>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,6 @@ package br.feevale.physis.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
@@ -13,22 +12,26 @@ public interface GenericDAO<T extends Bean> {
 
 	public void setConnectionFactory(ConnectionFactory factory);
 	
-	public Connection getConnection() throws SQLException;
+	public Connection getConnection() throws Exception;
 	
-	public void close(Statement stm) throws SQLException;
+	public void close(Statement stm) throws Exception;
 	
-	public PreparedStatement executeQuery(String query) throws SQLException;
+	public Integer executeInsertOrUpdate(String query, List<Object> parameters) throws Exception;
 	
-	public PreparedStatement executeQuery(String query, List<Object> parameters) throws SQLException;
+	public PreparedStatement executeQuery(String query) throws Exception;
 	
-	public Integer save(T bean) throws SQLException;
+	public PreparedStatement executeQuery(String query, Object... parameters) throws Exception;
 	
-	public boolean delete(T bean) throws SQLException;
+	public PreparedStatement executeQuery(String query, List<Object> parameters) throws Exception;
 	
-	public T get(Integer id) throws SQLException;
+	public T save(T bean) throws Exception;
 	
-	public List<T> listAll() throws SQLException;
+	public boolean delete(T bean) throws Exception;
 	
-	public List<T> queryByExample(T example) throws SQLException;
+	public T get(Integer id) throws Exception;
+	
+	public List<T> listAll() throws Exception;
+	
+	public List<T> queryByExample(T example) throws Exception;
 	
 }

@@ -2,7 +2,6 @@ package br.feevale.physis.business.model.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,25 +11,25 @@ import br.feevale.physis.dao.GenericDAOImpl;
 public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 	
 	@Override
-	public Integer save(Pessoa bean) throws SQLException {
+	public Pessoa save(Pessoa bean) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(Pessoa bean) throws SQLException {
+	public boolean delete(Pessoa bean) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Pessoa get(Integer id) throws SQLException {
+	public Pessoa get(Integer id) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Pessoa> listAll() throws SQLException {
+	public List<Pessoa> listAll() throws Exception {
 		PreparedStatement stm = executeQuery("SELECT * FROM pessoas");
 		ResultSet rs = stm.getResultSet();
 
@@ -50,7 +49,7 @@ public class PessoaDAO extends GenericDAOImpl<Pessoa>{
 	}
 
 	@Override
-	public List<Pessoa> queryByExample(Pessoa example) throws SQLException {
+	public List<Pessoa> queryByExample(Pessoa example) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -2,8 +2,9 @@ package br.feevale.physis.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Arrays;
 import java.util.List;
 
 import br.feevale.physis.exception.InvalidConnectionFactoryException;
@@ -21,7 +22,7 @@ public abstract class GenericDAOImpl<T extends Bean> implements GenericDAO<T> {
 	}
 	
 	@Override
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws Exception {
 		if (factory == null) {
 			throw new InvalidConnectionFactoryException(null);
 		}
@@ -30,7 +31,7 @@ public abstract class GenericDAOImpl<T extends Bean> implements GenericDAO<T> {
 	}
 	
 	@Override
-	public void close(Statement stm) throws SQLException {
+	public void close(Statement stm) throws Exception {
 		Connection conn = stm.getConnection();
 		
 		stm.close();
@@ -38,12 +39,37 @@ public abstract class GenericDAOImpl<T extends Bean> implements GenericDAO<T> {
 	}
 	
 	@Override
-	public PreparedStatement executeQuery(String query) throws SQLException {
+	public Integer executeInsertOrUpdate(String query, List<Object> parameters) throws Exception {
+		PreparedStatement stm = executeQuery(query, parameters);
+		ResultSet rs = stm.getGeneratedKeys();
+		
+		Integer result = null;
+		if (rs.next()) {
+			result = rs.getInt(1);
+		}
+		
+		close(stm);
+		
+		return result;
+	}
+	
+	@Override
+	public PreparedStatement executeQuery(String query) throws Exception {
 		return executeQuery(query, (List<Object>) null);
 	}
 	
 	@Override
-	public PreparedStatement executeQuery(String query, List<Object> parameters) throws SQLException {
+	public PreparedStatement executeQuery(String query, Object... parameters) throws Exception {
+		List<Object> parametersList = null;
+		if (parameters != null) {
+			parametersList = Arrays.asList(parameters);
+		}
+		
+		return executeQuery(query, parametersList);
+	}
+	
+	@Override
+	public PreparedStatement executeQuery(String query, List<Object> parameters) throws Exception {
 		PreparedStatement stm = getConnection().prepareStatement(query);
 		
 		if (CollectionUtils.isNotEmpty(parameters)) {

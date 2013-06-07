@@ -18,6 +18,7 @@
 					<div class="container">
 						<div class="carousel-caption">
 							<h1>Você já treinou hoje?</h1>
+							<p class="lead">Não deixe seu treino para amanhã!</p>
 							<a class="btn btn-large btn-danger" href="#">Entrar</a>
 						</div>
 					</div>

@@ -33,8 +33,9 @@ public class ResponseView implements View {
 		this.variables = new HashMap<String, Object>();
 	}
 	
-	protected void configureDefaultVariables(HttpServletRequest request) {
-		setVariable("contextPath", request.getContextPath());
+	protected void configureDefaultAttributes(HttpServletRequest request) {
+		request.setAttribute("contextPath", request.getContextPath());
+		request.setAttribute("appPath", request.getContextPath() + request.getServletPath());
 	}
 
 	protected void setRequestAttributes(HttpServletRequest request) {
@@ -69,7 +70,7 @@ public class ResponseView implements View {
 	
 	@Override
 	public void forward(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		configureDefaultVariables(request);
+		configureDefaultAttributes(request);
 		setRequestAttributes(request);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(buildUrl(request));

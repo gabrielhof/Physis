@@ -42,18 +42,26 @@ public class DefaultServlet extends HttpServlet {
 			String controllerName = null;
 			
 			if (url.length == 4) {
+				//Caso o tamanho da url seja 4, o valor da ultima posicao da url sera o controller 
 				controllerName = url[3];
 			} else if (url.length > 4) {
-				controllerName = url[url.length-2];
+				//Se for maior que 4, o controller sera a penultima posicao da url
+				controllerName = url[url.length-2]; //
 			} else {
+				//Caso seja menor que 4, nao havera controller e o default sera o 'index'
 				controllerName = "index";
 			}
 			
+			/*
+			 * Verifica se a url possui mais de 4 posicoes, a ultima posicao sera a action.
+			 * Caso contrario a action sera a 'index'
+			 */
 			String action = url.length > 4 ? url[url.length-1] : "index";
 			
 			request.setAttribute("controller", controllerName);
 			request.setAttribute("action", action);
 			
+			// Procura pelo controller e invoca a action
 			Controller controller = controllerFactory.create(controllerName);
 			controller.invoke(action, request, response);
 		} catch (Exception e) {

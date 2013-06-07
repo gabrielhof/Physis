@@ -14,9 +14,9 @@ public class TemplateView extends ResponseView {
 	}
 	
 	@Override
-	protected void configureDefaultVariables(HttpServletRequest request) {
-		super.configureDefaultVariables(request);
-		setVariable("viewFile", super.buildUrl(request));
+	protected void configureDefaultAttributes(HttpServletRequest request) {
+		super.configureDefaultAttributes(request);
+		request.setAttribute("viewFile", super.buildUrl(request));
 	}
 	
 	@Override
