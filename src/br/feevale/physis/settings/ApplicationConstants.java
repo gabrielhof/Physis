@@ -27,6 +27,8 @@ public final class ApplicationConstants {
 	
 	public static final String DEFAULT_SESSION_VARIABLE = "userSession";
 	
+	public static final String PERSISTENCE_UNIT_NAME = "physis";
+	
 	public static final Class<? extends ControllerFactory> DEFAULT_CONTROLLER_FACTORY = ControllerFactoryImpl.class;
 	
 	public static final Class<? extends ActionControllerBuilderFactory> DEFAULT_ACTION_CONTROLLER_BUILDER_FACTORY = ActionControllerBuilderFactoryImpl.class;

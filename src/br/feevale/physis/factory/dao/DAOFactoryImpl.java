@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import br.feevale.physis.dao.GenericDAO;
-import br.feevale.physis.factory.connection.ConnectionFactory;
 import br.feevale.physis.model.Bean;
-import br.feevale.physis.settings.ApplicationSettings;
 
 public class DAOFactoryImpl implements DAOFactory {
 
@@ -22,14 +20,10 @@ public class DAOFactoryImpl implements DAOFactory {
 	}
 	
 	private Map<Class<? extends GenericDAO<?>>, GenericDAO<?>> daos;
-	private ConnectionFactory connectionFactory;
 
-	private ApplicationSettings settings = ApplicationSettings.getInstance();
-	
 	private DAOFactoryImpl() {
 		try {
 			daos = new HashMap<Class<? extends GenericDAO<?>>, GenericDAO<?>>();
-			connectionFactory = settings.getConnectionFactory();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -51,7 +45,6 @@ public class DAOFactoryImpl implements DAOFactory {
 					impl = daoInterface.newInstance();
 				}
 				
-				impl.setConnectionFactory(connectionFactory);
 				daos.put(daoInterface, impl);
 			}
 		} catch (Exception e) {
