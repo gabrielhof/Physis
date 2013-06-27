@@ -1,7 +1,14 @@
 package br.feevale.physis.business.model.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import br.feevale.physis.model.Bean;
 
+@Entity
+@Table(name="users")
 @SuppressWarnings("serial")
 public class User extends Bean {
 
@@ -9,6 +16,7 @@ public class User extends Bean {
 	private String username;
 	private String password;
 	
+	@Id @GeneratedValue
 	public Integer getId() {
 		return id;
 	}

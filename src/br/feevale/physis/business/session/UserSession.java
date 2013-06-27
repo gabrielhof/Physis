@@ -23,7 +23,7 @@ public class UserSession {
 	}
 	
 	public static void setUser(HttpSession session, User user) {
-		if (getUser(session) != null) {
+		if (user != null) {
 			session.setAttribute(settings.getSessionVariable(), user);
 		}
 	}

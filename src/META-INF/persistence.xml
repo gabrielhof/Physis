@@ -8,6 +8,8 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>br.feevale.physis.business.model.bean.User</class>
 		<properties>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
 			<property name="javax.persistence.jdbc.user" value="root"/>
