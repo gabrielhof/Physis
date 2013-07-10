@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<menu>
+	<menus>
+		<menu name="Avo" controller="ControllerAvo" action="ActionAvo" role="ADMIN">
+			<menus>
+				<menu name="Pai" controller="ControllerPai" action="ActionPai" role="USER"/>
+				<menu name="OutroPai" controller="ControllerOutroPai" action="ActionOutroPai" role="PROFESSOR" />
+			</menus>
+		</menu>
+	</menus>
+</menu>

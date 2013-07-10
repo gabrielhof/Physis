@@ -14,11 +14,11 @@ import br.feevale.physis.factory.controller.ControllerFactory;
 import br.feevale.physis.factory.controller.builder.ActionControllerBuilderFactory;
 import br.feevale.physis.settings.ApplicationSettings;
 
-@SuppressWarnings("serial")
-public class DefaultServlet extends HttpServlet {
+public class FrontController extends HttpServlet {
+
+	private static final long serialVersionUID = -1646352420402126974L;
 
 	private ActionControllerBuilderFactory actionControllerBuilderFactory;
-	
 	private ControllerFactory controllerFactory;
 	
 	private ApplicationSettings settings = ApplicationSettings.getInstance();
