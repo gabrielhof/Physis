@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <menu>
 	<menus>
-		<menu name="Avo" controller="ControllerAvo" action="ActionAvo" role="ADMIN">
+		<menu name="Home" controller="home" action="" />
+		<menu name="Pessoas" controller="person" action="" role="ADMIN">
 			<menus>
-				<menu name="Pai" controller="ControllerPai" action="ActionPai" role="USER"/>
-				<menu name="OutroPai" controller="ControllerOutroPai" action="ActionOutroPai" role="PROFESSOR" />
+				<menu name="Nova Pessoa" controller="person" action="new"></menu>
+			</menus>
+		</menu>
+		<menu name="Alguma Coisa" controller="algumaCoisa" action="" role="ADMIN">
+			<menus>
+				<menu name="Nova Pessoa" controller="person" action="new"></menu>
 			</menus>
 		</menu>
 	</menus>

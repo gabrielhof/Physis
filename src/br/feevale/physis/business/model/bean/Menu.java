@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import br.feevale.physis.business.model.enums.Role;
 import br.feevale.physis.model.Bean;
+import br.feevale.physis.util.StringUtils;
 
 @XmlRootElement
 public class Menu extends Bean {
@@ -67,5 +68,18 @@ public class Menu extends Bean {
 	
 	public void setMenus(List<Menu> menus) {
 		this.menus = menus;
+	}
+	
+	public String getUrl() {
+		StringBuilder url = new StringBuilder();
+		if (StringUtils.isNotBlank(getController())) {
+			url.append(StringUtils.uncapitalizeFirst(getController())).append("/");
+		}
+		
+		if (StringUtils.isNotBlank(getAction())) {
+			url.append(StringUtils.uncapitalizeFirst(getAction())).append("/");
+		}
+		
+		return url.toString();
 	}
 }

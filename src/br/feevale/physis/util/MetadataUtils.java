@@ -44,8 +44,10 @@ public class MetadataUtils {
 			
 			if (someInput instanceof InputStream) {
 				o = (T) unmarshaller.unmarshal((InputStream) someInput);
+				((InputStream) someInput).close();
 			} else if (someInput instanceof Reader) {
 				o = (T) unmarshaller.unmarshal((Reader) someInput);
+				((Reader) someInput).close();
 			} else {
 				//TODO
 			}

@@ -5,16 +5,6 @@
 		<servlet-class>br.feevale.physis.servlet.FrontController</servlet-class>
 	</servlet>
 	
-	<servlet>
-		<servlet-name>Teste</servlet-name>
-		<servlet-class>br.feevale.physis.servlet.Teste</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-		<servlet-name>Teste</servlet-name>
-		<url-pattern>/teste</url-pattern>
-	</servlet-mapping>
-	
 	<servlet-mapping>
 		<servlet-name>FrontController</servlet-name>
 		<url-pattern>/app</url-pattern>
