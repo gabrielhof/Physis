@@ -9,7 +9,7 @@
 		
 		<title>Physis</title>
 	
-		<link href="${contextPath}/assets/css/index.css" rel="stylesheet"/>
+		<link href="${contextPath}/assets/css/style.css" rel="stylesheet"/>
 	</head>
 	<body>
 		<div class="navbar navbar-fixed-top">
@@ -22,13 +22,23 @@
 					</button>
 					
 					<a class="brand" href="${contextPath}">Physis</a>
+					<div class="btn-group" style="float: right;">
+						<a href="javascript:void(0);" class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">${user.username} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="${appPath}/login/doLogoff" onclick="return confirmDialog(this, 'Ter certeza que deseja sair do sistema?', 'Deseja sair?');">Sair</a></li>
+						</ul>
+					</div>
 					
 					<jsp:include page="menu.jsp" />
 				</div>
 			</div>
 		</div>
 	
-		<jsp:include page="${viewFile}"></jsp:include>
+		<div class="container content">
+			<jsp:include page="${viewFile}" />
+		</div>
+		
+		<jsp:include page="footer.jsp" />
 		
 		<script type="text/javascript" src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>	
 		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap.min.js"></script>

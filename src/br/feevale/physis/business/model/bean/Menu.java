@@ -20,7 +20,7 @@ public class Menu extends Bean {
 	private String controller;
 	private String action;
 	
-	private Role role;
+	private Role role = Role.ANY;
 	
 	private List<Menu> menus;
 	
@@ -57,7 +57,9 @@ public class Menu extends Bean {
 	}
 	
 	public void setRole(Role role) {
-		this.role = role;
+		if (role != null) {
+			this.role = role;
+		}
 	}
 	
 	@XmlElementWrapper(name="menus")

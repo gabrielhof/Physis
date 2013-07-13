@@ -1,8 +1,8 @@
 package br.feevale.physis.enums;
 
-public interface EnumDomain<T> {
+public interface EnumDomain {
 
-	public T getValue();
+	public String getValue();
 	
 	public String toString();
 	

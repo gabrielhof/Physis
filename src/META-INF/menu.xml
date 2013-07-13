@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <menu>
 	<menus>
-		<menu name="Home" controller="home" action="" />
+		<menu name="Home" controller="home" action="" role="ANY"/>
 		<menu name="Pessoas" controller="person" action="" role="ADMIN">
 			<menus>
-				<menu name="Nova Pessoa" controller="person" action="new"></menu>
+				<menu name="Pessoas Cadastradas" controller="person" action="" role="ADMIN"></menu>
+				<menu name="Nova Pessoa" controller="person" action="new" role="ADMIN"></menu>
 			</menus>
 		</menu>
-		<menu name="Alguma Coisa" controller="algumaCoisa" action="" role="ADMIN">
+		<menu name="Alguma Coisa" controller="algumaCoisa" action="" role="USER">
 			<menus>
 				<menu name="Nova Pessoa" controller="person" action="new"></menu>
 			</menus>

@@ -28,5 +28,11 @@ public class UserSession {
 		}
 	}
 	
+	public static void destroy(HttpSession session) {
+		if (getUser(session) != null) {
+			session.invalidate();
+		}
+	}
+	
 	
 }

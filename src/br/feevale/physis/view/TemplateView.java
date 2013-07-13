@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import br.feevale.physis.builder.menu.MenuBuilder;
 import br.feevale.physis.builder.menu.XmlMenuBuilder;
+import br.feevale.physis.business.session.UserSession;
 import br.feevale.physis.exception.InvalidViewException;
 import br.feevale.physis.settings.ApplicationSettings;
 
@@ -22,6 +23,7 @@ public class TemplateView extends ResponseView {
 		super.configureDefaultAttributes(request);
 		request.setAttribute("viewFile", super.buildUrl(request));
 		request.setAttribute("menu", menuBuilder.build());
+		request.setAttribute("user", UserSession.getUser(request));
 	}
 	
 	@Override

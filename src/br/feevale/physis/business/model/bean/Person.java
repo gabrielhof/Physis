@@ -1,8 +1,15 @@
 package br.feevale.physis.business.model.bean;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import br.feevale.physis.model.Bean;
 
-public class Pessoa extends Bean {
+@Entity
+@Table(name="people")
+public class Person extends Bean {
 
 	private static final long serialVersionUID = 5244070687230420960L;
 	
@@ -10,6 +17,8 @@ public class Pessoa extends Bean {
 	private String name;
 	private Integer age;
 	
+	@Id
+	@GeneratedValue
 	public Integer getId() {
 		return id;
 	}

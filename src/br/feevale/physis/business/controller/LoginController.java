@@ -46,4 +46,10 @@ public class LoginController implements DefaultController {
 			ResponseUtils.redirect(request, response, "home");
 		}
 	}
+	
+	@Request(sessionRequired=true)
+	public void doLogoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		UserSession.destroy(request.getSession());
+		ResponseUtils.redirect(request, response, "");
+	}
 }
