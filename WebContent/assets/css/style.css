@@ -19,6 +19,13 @@ a {
 	padding-bottom: 30px;
 }
 
+.default-form {
+	background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px 4px 4px 4px;
+    padding-top: 20px;	
+}
+
 footer {
 	margin: 30px auto 0 auto;
 	width: 1170px;

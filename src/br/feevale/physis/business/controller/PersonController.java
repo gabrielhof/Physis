@@ -25,5 +25,10 @@ public class PersonController implements DefaultController {
 		indexView.setVariable("people", people);
 		indexView.forward(request, response);
 	}
+	
+	public void newAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		View view = ViewBuilder.build("person", "newPerson");
+		view.forward(request, response);	
+	}
 
 }
