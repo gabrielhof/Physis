@@ -7,6 +7,11 @@ function onDocumentReady() {
 	$(".carousel").carousel();
 	$(".back-to-top").click(backToTop);
 	
+	$("input[type='text'].date").datepicker({language:"pt-BR", format: "dd/mm/yyyy"});
+	$("input[type='text'][mask]").each(function () {
+		$(this).mask($(this).attr("mask"));
+	});
+	
 	$("input.error").change(removeErrorFieldAction);
 }
 

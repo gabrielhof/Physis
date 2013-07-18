@@ -19,11 +19,19 @@ a {
 	padding-bottom: 30px;
 }
 
-.default-form {
+form.default-form {
 	background-color: #FFFFFF;
     border: 1px solid #DDDDDD;
     border-radius: 4px 4px 4px 4px;
-    padding-top: 20px;	
+    padding-top: 20px;
+}
+
+form.default-form > fieldset {
+	padding: 0px 20px 0px 20px;
+}
+
+.form-actions {
+	margin-bottom: 0px;
 }
 
 footer {

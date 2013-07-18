@@ -5,6 +5,7 @@
 <%@ attribute name="action" required="true" type="java.lang.String" description="Action" %>
 <%@ attribute name="method" type="java.lang.String" description="HTTP Method" %>
 
+
 <c:if test="${empty method}">
 	<c:set var="method" value="GET" />
 </c:if>

@@ -1,22 +1,26 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
 <%@ attribute name="id" required="true" type="java.lang.String" description="HTML Id" %>
+<%@ attribute name="label" required="true" type="java.lang.String" description="Label" %>
 <%@ attribute name="type" required="true" type="java.lang.String" description="HTML Field Type" %>
-<%@ attribute name="label" required="true" type="java.lang.String" description="HTML Label" %>
 <%@ attribute name="value" type="java.lang.String" description="HTML Value" %>
 <%@ attribute name="styleClass" type="java.lang.String" description="HTML Class" %>
 <%@ attribute name="style" type="java.lang.String" description="CSS Style" %>
 <%@ attribute name="required" type="java.lang.Boolean" description="Is field required?" %>
 <%@ attribute name="readonly" type="java.lang.Boolean" description="Is field enabled?" %>
+<%@ attribute name="column" type="java.lang.Integer" description="Column Span" %>
 <%@ attribute name="mask" type="java.lang.String" description="Mask" %>
 
-<div class="control-group">
-	<div class="span4">
-		<label class="control-label" for="${id}">${label}:</label>
-		<div class="controls">
-			<f:input id="${id}" type="${type}" value="${value}" placeholder="${label}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" mask="${mask}"/>
-		</div>
+<c:if test="${empty column}">
+	<c:set var="column" value="4"/>
+</c:if>
+
+
+<div class="span${column}">
+	<label class="control-label" for="${id}">${label}:</label>
+	<div class="controls">
+		<f:input type="${type}" id="${id}" value="${value}" placeholder="${label}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" mask="${mask}" />
 	</div>
 </div>

@@ -8,6 +8,10 @@ public abstract class Bean implements Serializable {
 
 	private static final long serialVersionUID = 1996182945173084373L;
 	
+	public abstract Integer getId();
+	
+	public abstract String toUserString();
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == null) {

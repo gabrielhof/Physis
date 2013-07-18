@@ -9,6 +9,7 @@
 		
 		<title>Physis</title>
 	
+		<link href="${contextPath}/assets/css/datepicker.css" rel="stylesheet"/>
 		<link href="${contextPath}/assets/css/style.css" rel="stylesheet"/>
 	</head>
 	<body>
@@ -42,6 +43,9 @@
 		
 		<script type="text/javascript" src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>	
 		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${contextPath}/assets/js/jquery.maskedinput.min.js"></script>
+		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap-datepicker.js"></script>
+		<script type="text/javascript" src="${contextPath}/assets/js/locale/bootstrap-datepicker.pt-BR.js"></script>
 		<script type="text/javascript" src="${contextPath}/assets/js/application/application.js"></script>
 	</body>
 </html>

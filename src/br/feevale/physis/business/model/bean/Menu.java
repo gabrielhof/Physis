@@ -1,5 +1,6 @@
 package br.feevale.physis.business.model.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -8,11 +9,10 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import br.feevale.physis.business.model.enums.Role;
-import br.feevale.physis.model.Bean;
 import br.feevale.physis.util.StringUtils;
 
 @XmlRootElement
-public class Menu extends Bean {
+public class Menu implements Serializable {
 
 	private static final long serialVersionUID = -6209978512083996069L;
 	
