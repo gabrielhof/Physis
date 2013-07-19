@@ -13,7 +13,7 @@
 
 <div class="control-group">
 	<div class="span4">
-		<label class="control-label" for="${id}">${label}:</label>
+		<label class="control-label" for="${id}">${label}:${not empty required and required ? "<span class='red'>*</span>" : ''}</label>
 		<div class="controls">
 			<f:select enumClass="${enumClass}" id="${id}" value="${value}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" />
 		</div>

@@ -18,8 +18,8 @@
 </c:if>
 
 
-<div class="span${column}">
-	<label class="control-label" for="${id}">${label}:</label>
+<div class="span${column} control-group">
+	<label class="control-label" for="${id}">${label}:${not empty required and required ? "<span class='red'>*</span>" : ''}</label>
 	<div class="controls">
 		<f:input type="${type}" id="${id}" value="${value}" placeholder="${label}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" mask="${mask}" />
 	</div>

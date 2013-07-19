@@ -34,6 +34,10 @@ form.default-form > fieldset {
 	margin-bottom: 0px;
 }
 
+.red {
+	color: red;
+}
+
 footer {
 	margin: 30px auto 0 auto;
 	width: 1170px;

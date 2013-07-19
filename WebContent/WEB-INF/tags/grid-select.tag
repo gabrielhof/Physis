@@ -11,8 +11,8 @@
 <%@ attribute name="required" type="java.lang.Boolean" description="Is field required?" %>
 <%@ attribute name="readonly" type="java.lang.Boolean" description="Is field enabled?" %>
 
-<div class="span4">
-	<label class="control-label" for="${id}">${label}:</label>
+<div class="span4 control-group">
+	<label class="control-label" for="${id}">${label}:${not empty required and required ? "<span class='red'>*</span>" : ""}</label>
 	<div class="controls">
 		<f:select enumClass="${enumClass}" id="${id}" value="${value}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" />
 	</div>

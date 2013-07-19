@@ -36,6 +36,7 @@
 		</div>
 	
 		<div class="container content">
+			<div class="alert hide"></div>
 			<jsp:include page="${viewFile}" />
 		</div>
 		

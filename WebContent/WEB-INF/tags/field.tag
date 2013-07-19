@@ -14,7 +14,7 @@
 
 <div class="control-group">
 	<div class="span4">
-		<label class="control-label" for="${id}">${label}:</label>
+		<label class="control-label" for="${id}">${label}:${not empty required and required ? "<span class='red'>*</span>" : ''}</label>
 		<div class="controls">
 			<f:input id="${id}" type="${type}" value="${value}" placeholder="${label}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" mask="${mask}"/>
 		</div>

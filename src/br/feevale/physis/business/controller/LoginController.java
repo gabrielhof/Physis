@@ -12,7 +12,7 @@ import br.feevale.physis.business.session.UserSession;
 import br.feevale.physis.business.view.MarketingTemplateView;
 import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.enums.RequestMethod;
-import br.feevale.physis.util.ResponseUtils;
+import br.feevale.physis.util.RequestUtils;
 import br.feevale.physis.view.View;
 
 public class LoginController implements DefaultController {
@@ -40,16 +40,16 @@ public class LoginController implements DefaultController {
 		
 		if (user == null) {
 			request.getSession().setAttribute("invalidLogin", true);
-			ResponseUtils.redirect(request, response, "login");
+			RequestUtils.redirect(request, response, "login");
 		} else {
 			UserSession.setUser(request, user);
-			ResponseUtils.redirect(request, response, "home");
+			RequestUtils.redirect(request, response, "home");
 		}
 	}
 	
 	@Request(sessionRequired=true)
 	public void doLogoff(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		UserSession.destroy(request.getSession());
-		ResponseUtils.redirect(request, response, "");
+		RequestUtils.redirect(request, response, "");
 	}
 }
