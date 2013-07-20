@@ -8,5 +8,5 @@ CREATE TABLE people(
 	rg varchar(10) NOT NULL,
 	cpf varchar(14) NOT NULL,
 	email varchar (100),
-	phone varchar(10)
+	phone varchar(16)
 ) ENGINE=InnoDB;

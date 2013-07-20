@@ -8,8 +8,12 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class MetadataUtils {
 
+	private static final ObjectMapper mapper = new ObjectMapper();
+	
 	public static String fromObjectToXml(Object o) {
 		try {
 			File file = File.createTempFile("jaxb_temp_xml_", ".xml");
@@ -53,6 +57,14 @@ public class MetadataUtils {
 			}
 			
 			return o;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public static String fromObjecToJson(Object something) {
+		try {
+			return mapper.writeValueAsString(something);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

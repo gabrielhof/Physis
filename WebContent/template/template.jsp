@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
 <!DOCTYPE html>
 <html>
@@ -11,6 +12,11 @@
 	
 		<link href="${contextPath}/assets/css/datepicker.css" rel="stylesheet"/>
 		<link href="${contextPath}/assets/css/style.css" rel="stylesheet"/>
+		
+		<script type="text/javascript">
+			var contextPath = "${contextPath}";
+			var appPath = "${appPath}";
+		</script>
 	</head>
 	<body>
 		<div class="navbar navbar-fixed-top">
@@ -42,11 +48,12 @@
 		
 		<jsp:include page="footer.jsp" />
 		
-		<script type="text/javascript" src="${contextPath}/assets/js/jquery-1.9.1.min.js"></script>	
-		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="${contextPath}/assets/js/jquery.maskedinput.min.js"></script>
-		<script type="text/javascript" src="${contextPath}/assets/js/bootstrap-datepicker.js"></script>
-		<script type="text/javascript" src="${contextPath}/assets/js/locale/bootstrap-datepicker.pt-BR.js"></script>
-		<script type="text/javascript" src="${contextPath}/assets/js/application/application.js"></script>
+		<f:script src="jquery-1.9.1.min.js" />
+		<f:script src="bootstrap.min.js" />
+		<f:script src="jquery.maskedinput.min.js" />
+		<f:script src="bootstrap-datepicker.js" />
+		<f:script src="locale/bootstrap-datepicker.pt-BR.js" />
+		<f:script src="jquery.blockUI.js" />
+		<f:script src="application/application.js" />
 	</body>
 </html>

@@ -71,7 +71,7 @@ public class PermissionFilter implements Filter {
 				String roleString = (String) xPath.evaluate(String.format("//*[@controller='%s' and (@action='%s' or @action='%s')]/@role", controller, action, otherAction), menuDocument.getDocumentElement(), XPathConstants.STRING);
 				Role role = Role.forValue(roleString);
 				
-				if (role.isAny() || user.getRole().equals(role)) {
+				if (role == null || user.getRole().equals(role)) {
 					chain.doFilter(request, response);
 				} else {
 					throw new PermissionException("Permissão negada.");

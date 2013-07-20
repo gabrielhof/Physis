@@ -13,6 +13,16 @@
 		</function>
 		
 		<tag-file>
+			<name>table</name>
+			<path>/WEB-INF/tags/table.tag</path>
+		</tag-file>
+		
+		<tag-file>
+			<name>column</name>
+			<path>/WEB-INF/tags/column.tag</path>
+		</tag-file>
+		
+		<tag-file>
 			<name>form</name>
 			<path>/WEB-INF/tags/form.tag</path>
 		</tag-file>
@@ -65,5 +75,15 @@
 		<tag-file>
 			<name>button</name>
 			<path>/WEB-INF/tags/button.tag</path>
+		</tag-file>
+		
+		<tag-file>
+			<name>script</name>
+			<path>/WEB-INF/tags/script.tag</path>
+		</tag-file>
+		
+		<tag-file>
+			<name>case</name>
+			<path>/WEB-INF/tags/case.tag</path>
 		</tag-file>
 </taglib>

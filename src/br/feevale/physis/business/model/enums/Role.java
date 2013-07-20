@@ -15,9 +15,7 @@ public enum Role implements EnumDomain {
 	@XmlEnumValue("PROFESSOR")
 	PROFESSOR("PROFESSOR", "Professor", false),
 	@XmlEnumValue("USER")
-	USER("USER", "Usuario", false),
-	@XmlEnumValue("ANY")
-	ANY("ANY", "Qualquer", true);
+	USER("USER", "Usuario", false);
 
 	private String value;
 	private String meaning;
@@ -51,7 +49,7 @@ public enum Role implements EnumDomain {
 			}
 		}
 		
-		return Role.ANY;
+		return null;
 	}
 
 }

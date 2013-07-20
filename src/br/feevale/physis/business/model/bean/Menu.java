@@ -20,7 +20,7 @@ public class Menu implements Serializable {
 	private String controller;
 	private String action;
 	
-	private Role role = Role.ANY;
+	private Role role;
 	
 	private List<Menu> menus;
 	

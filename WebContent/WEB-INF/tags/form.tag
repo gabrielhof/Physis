@@ -13,7 +13,14 @@
 
 <c:set var="onsubmitHtml" value="" />
 <c:if test="${not empty validation}">
-	<c:set var="onsubmitHtml" value="onsubmit=\"return ${validation}(this);\" novalidate" />
+	<c:choose>
+		<c:when test="${validation eq \"defaultFormValidation\"}">
+			<c:set var="onsubmitHtml" value="onsubmit=\"return ${validation}(this);\" novalidate" />
+		</c:when>
+		<c:otherwise>
+			<c:set var="onsubmitHtml" value="onsubmit=\"return defaultFormValidation(this, ${validation});\" novalidate" />
+		</c:otherwise>
+	</c:choose>
 </c:if>
 
 <form class="default-form form-horizontal" method="${method}" action="${appPath}/${controller}/${action}" ${onsubmitHtml}>

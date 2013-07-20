@@ -116,22 +116,22 @@ function confirmDialog(that, message, title) {
  * Alerts
  */
 function error(message) {
-	alert("alert-error", message);
+	alertMessage("alert-error", message);
 }
 
 function warning(message) {
-	alert("", message);
+	alertMessage("", message);
 }
 
 function success(message) {
-	alert("alert-success", message);
+	alertMessage("alert-success", message);
 }
 
 function info(message) {
-	alert("alert-info", message);
+	alertMessage("alert-info", message);
 }
 
-function alert(type, message, timeout) {
+function alertMessage(type, message, timeout) {
 	if (timeout == null || typeof(timeout) == "undefined") {
 		timeout = 20000;
 	}
@@ -169,9 +169,19 @@ function alert(type, message, timeout) {
 /**
  * Validacoes gerais
  */
-function defaultFormValidation(form) {
+function defaultFormValidation(form, validationFunction) {
+	$.blockUI({message: "Por favor, aguarde..."});
+	
 	form = $(form);
-	return validateRequiredFields(form) && validateEmail(form);
+	var result = validateRequiredFields(form) && validateEmail(form);
+	
+	if (result && typeof(validationFunction) == "function") {
+		result = validationFunction(form);
+	}
+	
+	$.unblockUI();
+	
+	return result;
 }
 
 function validateRequiredFields(form) {
@@ -200,7 +210,10 @@ function validateEmail(form) {
 		var value = $(this).val();
 		if (isStringNotBlank(value)) {
 			invalidEmail = !emailRegex.test(value);
-			markField("error", $(this));
+			
+			if (invalidEmail) {
+				markField("error", $(this));
+			}
 		}
 	});
 	
@@ -289,6 +302,23 @@ function isStringBlank(s) {
 
 function isStringNotBlank(s) {
 	return !isStringBlank(s);
+}
+
+/**
+ * Ajax
+ */
+function ajax(controller, action, data, method) {
+	if (method == null || typeof(method) != "string") {
+		type = "POST";
+	}
+	
+	method = type.toUpperCase();
+	url = appPath + "/" + controller + "/" + action;
+	
+	json = $.ajax({type: method, url: url, data: data, dataType: "json", async: false}).responseText;
+	json = $.parseJSON(json);
+	
+	return json;
 }
 
 /**
