@@ -6,11 +6,14 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import br.feevale.physis.converter.Converter;
 import br.feevale.physis.converter.RequestConverter;
+import br.feevale.physis.enums.Converters;
+import br.feevale.physis.model.Bean;
 import br.feevale.physis.util.RequestUtils;
 import br.feevale.physis.util.StringUtils;
 
-public class GenericRequestConverter<T> implements RequestConverter<T> {
+public class BeanRequestConverter<T extends Bean> implements RequestConverter<T> {
 
 	private Map<String, String> parameters;
 	private Class<T> clazz;
@@ -18,15 +21,15 @@ public class GenericRequestConverter<T> implements RequestConverter<T> {
 	
 	private Map<String, Object> properties;
 	
-	public GenericRequestConverter(HttpServletRequest request, Class<T> clazz) {
-		this(request, clazz, StringUtils.uncapitalizeFirst(clazz.getName()));
+	public BeanRequestConverter(HttpServletRequest request, Class<T> clazz) {
+		this(request, clazz, StringUtils.uncapitalizeFirst(clazz.getSimpleName()));
 	}
 	
-	public GenericRequestConverter(HttpServletRequest request, Class<T> clazz, String var) {
+	public BeanRequestConverter(HttpServletRequest request, Class<T> clazz, String var) {
 		this(RequestUtils.getRequestParameters(request), clazz, var);
 	}
 	
-	public GenericRequestConverter(Map<String, String> parameters, Class<T> clazz, String var) {
+	public BeanRequestConverter(Map<String, String> parameters, Class<T> clazz, String var) {
 		this.parameters = parameters;
 		this.clazz = clazz;
 		this.var = var;
@@ -60,9 +63,10 @@ public class GenericRequestConverter<T> implements RequestConverter<T> {
 	}
 
 	@Override
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public T convert() {
-		// TODO Auto-generated method stub
-		return null;
+		Converter converter = Converters.BEAN.getConverter();
+		return (T) converter.convert(clazz, properties.get(var));
 	}
 	
 }

@@ -62,9 +62,18 @@ public abstract class Bean implements Serializable {
 						field.setAccessible(true);
 					}
 					
+					Object value = field.get(this);
+					
 					builder.append("	");
 					builder.append(field.getName()).append("=");
-					builder.append(field.get(this));
+					
+					if (value instanceof Bean) {
+						builder.append(String.format("%s@%s", value.getClass().getName(), value.hashCode()));
+					} else if (value != null) {
+						builder.append(value);
+					} else {
+						builder.append("null");
+					}
 					
 					if (i < (fields.length-1)) {
 						builder.append(",\n");

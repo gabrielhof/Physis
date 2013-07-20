@@ -12,7 +12,7 @@ import br.feevale.physis.business.model.bean.Person;
 import br.feevale.physis.business.model.dao.PersonDAO;
 import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.converter.RequestConverter;
-import br.feevale.physis.converter.impl.GenericRequestConverter;
+import br.feevale.physis.converter.impl.BeanRequestConverter;
 import br.feevale.physis.enums.RequestMethod;
 import br.feevale.physis.view.View;
 
@@ -37,8 +37,11 @@ public class PersonController implements DefaultController {
 	
 	@Request(methods=RequestMethod.POST)
 	public void save(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		RequestConverter<Person> converter = new GenericRequestConverter<Person>(request, Person.class);
+		RequestConverter<Person> converter = new BeanRequestConverter<Person>(request, Person.class);
 		Person person  = converter.convert();
+		
+		person.getAddress().setPerson(person);
+		
 		System.out.println(person);
 	}
 
