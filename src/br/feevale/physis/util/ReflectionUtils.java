@@ -26,14 +26,25 @@ public class ReflectionUtils {
 			String setter = StringUtils.capitalizeFirst(propertyName);
 			setter = String.format("set%s", setter);
 			
-			return clazz.getDeclaredMethod(setter, parameterClass);
+			if (parameterClass != null) {
+				return clazz.getDeclaredMethod(setter, parameterClass);
+			} else {
+				Method methods[] = clazz.getDeclaredMethods();
+				for (Method method : methods) {
+					if (method.getName().equals(setter)) {
+						return method;
+					}
+				}
+			}
+			
+			return null;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
-	public static void setProperty(String propertyName, Object value, Object classInstance) {
-		Method setter = getSetter(propertyName, value == null ? Object.class : value.getClass(), classInstance.getClass());
+	public static void setProperty(String propertyName, Class<?> propertyType, Object value, Object classInstance) {
+		Method setter = getSetter(propertyName, propertyType, classInstance.getClass());
 		
 		try {
 			setter.invoke(classInstance, value);

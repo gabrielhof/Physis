@@ -23,7 +23,7 @@ public class BeanConverter implements Converter<Bean, Map<String, Object>> {
 					Converter converter = Converters.forClass(field.getType()).getConverter();
 					Object value = converter.convert(field.getType(), parameters.get(field.getName()));
 					
-					ReflectionUtils.setProperty(field.getName(), value, beanInstance);
+					ReflectionUtils.setProperty(field.getName(), field.getType(), value, beanInstance);
 				}
 			}
 			
