@@ -1,9 +1,10 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%@ attribute name="id" required="true" type="java.lang.String" description="HTML Id" %>
 <%@ attribute name="type" required="true" type="java.lang.String" description="HTML Field Type" %>
-<%@ attribute name="value" type="java.lang.String" description="HTML Value" %>
+<%@ attribute name="value" type="java.lang.Object" description="HTML Value" %>
 <%@ attribute name="styleClass" type="java.lang.String" description="HTML Class" %>
 <%@ attribute name="style" type="java.lang.String" description="CSS Style" %>
 <%@ attribute name="placeholder" type="java.lang.String" description="Field Placeholder" %>

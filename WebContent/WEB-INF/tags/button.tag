@@ -8,6 +8,7 @@
 <%@ attribute name="styleClass" type="java.lang.String" description="HTML Classes" %>
 <%@ attribute name="style" type="java.lang.String" description="HTML Style" %>
 <%@ attribute name="onclick" type="java.lang.String" description="javascript event" %>
+<%@ attribute name="parameters" type="java.lang.String" description="javascript event" %>
 
 <c:choose>
 	<c:when test="${not empty styleClass}">
@@ -36,11 +37,15 @@
 	</c:otherwise>
 </c:choose>
 
+<c:if test="${not empty parameters}">
+	<c:set var="parameters" value="?${parameters}"/>
+</c:if>
+
 <c:choose>
 	<c:when test="${not empty submit and submit}">
 		<button ${htmlClass} ${htmlStyle} ${onclickEvent} type="submit">${label}</button>
 	</c:when>
 	<c:otherwise>
-		<a href="${appPath}/${controller}/${action}" ${htmlClass} ${htmlStyle} ${onclickEvent}>${label}</a>
+		<a href="${appPath}/${controller}/${action}${parameters}" ${htmlClass} ${htmlStyle} ${onclickEvent}>${label}</a>
 	</c:otherwise>
 </c:choose>

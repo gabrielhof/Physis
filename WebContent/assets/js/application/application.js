@@ -15,6 +15,13 @@ function onDocumentReady() {
 
 function transformDateFields() {
 	$("input[type='text'].date").each(function() {
+		if (isStringNotBlank($(this).val())) {
+			var data = $(this).val().split("-");
+			if (data.length == 3) {
+				$(this).val(data[2] + "/" + data[1] + "/" + data[0]);
+			}
+		}
+		
 		$(this).mask("99/99/9999");
 		$(this).datepicker({language:"pt-BR", format: "dd/mm/yyyy", forceParse: false});
 		$(this).change(validateDate);
@@ -46,7 +53,7 @@ function scrollTo(obj) {
  * Dialogs
  */
 
-function confirmDialog(that, message, title) {
+function confirmDialog(that, message, title, doPost) {
 	var href = $(that).attr("href");
 	
 	var dialogWasConfirmed = false;
@@ -103,7 +110,11 @@ function confirmDialog(that, message, title) {
 		if (!dialogWasCanceled && !dialogWasConfirmed) {
 			setTimeout(waitSomethingToHappenWithThisDialog, 500);
 		} else if (dialogWasConfirmed) {
-			window.location = href;
+			if (typeof(doPost) != "undefined" && doPost) {
+				executeRequest("post", href);
+			} else {
+				window.location = href;
+			}
 		}
 	};
 	
@@ -111,6 +122,33 @@ function confirmDialog(that, message, title) {
 	
 	return false;
 }
+
+/**
+ * HTTP
+ */
+function executeRequest(method, url) {
+	url = url.split("?");
+	var form = $("<form class='hide'></form>");
+	form.attr("method", method);
+	form.attr("action", url[0]);
+	
+	if (url.length > 1) {
+		var parameters = url[1].split("&");
+		for (var i = 0; i < parameters.length; i++) {
+			var keyValue = parameters[i].split("=");
+			
+			var input = $("<input type='hidden' />");
+			input.attr("name", keyValue[0]);
+			input.attr("value", keyValue[1]);
+			
+			form.append(input);
+		}
+	}
+	
+	$("body").append(form);
+	form.submit();
+}
+
 
 /**
  * Alerts

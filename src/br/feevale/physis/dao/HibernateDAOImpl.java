@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
 
 import br.feevale.physis.model.Bean;
@@ -35,7 +36,12 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 	@Override
 	public boolean delete(T bean) throws Exception {
 		Session session = getHibernateSession();
-		session.delete(bean);
+		
+		Transaction transaction = session.beginTransaction();
+		
+		session.delete(session.get(getBeanClass(), bean.getId()));
+		session.flush();
+		transaction.commit();
 		
 		session.close();
 		

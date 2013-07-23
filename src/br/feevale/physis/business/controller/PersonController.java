@@ -77,6 +77,18 @@ public class PersonController implements DefaultController {
 		RequestUtils.redirect(request, response, "person");
 	}
 	
+	@Request(methods=RequestMethod.POST)
+	public void deleteAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String id = request.getParameter("id");
+		if (StringUtils.isNotBlank(id)) {
+			Person person = personDAO.get(Integer.parseInt(id));
+			
+			personDAO.delete(person);
+		}
+		
+		RequestUtils.redirect(request, response, "person");
+	}
+	
 	@Request(type=RequestType.AJAX, methods=RequestMethod.POST)
 	public void validateEmail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String email = request.getParameter("email");

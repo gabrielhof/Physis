@@ -1,6 +1,7 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
+<%@ tag dynamic-attributes="dynattrs" %>
 
 <%@ attribute name="id" required="true" type="java.lang.String" description="HTML Id" %>
 <%@ attribute name="type" required="true" type="java.lang.String" description="HTML Field Type" %>

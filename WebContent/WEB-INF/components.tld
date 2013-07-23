@@ -12,6 +12,12 @@
 			<function-signature>java.util.List getEnumValues(java.lang.String)</function-signature>
 		</function>
 		
+		<function>
+			<name>formatDate</name>
+			<function-class>br.feevale.physis.util.DateUtils</function-class>
+			<function-signature>java.lang.String formatDate(java.lang.Object)</function-signature>
+		</function>
+		
 		<tag-file>
 			<name>table</name>
 			<path>/WEB-INF/tags/table.tag</path>
@@ -75,6 +81,11 @@
 		<tag-file>
 			<name>button</name>
 			<path>/WEB-INF/tags/button.tag</path>
+		</tag-file>
+		
+		<tag-file>
+			<name>icon-button</name>
+			<path>/WEB-INF/tags/icon-button.tag</path>
 		</tag-file>
 		
 		<tag-file>
