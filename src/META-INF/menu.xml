@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <menu>
 	<menus>
-		<menu name="Home" controller="home" action="" role="ANY"/>
+		<menu name="Home" controller="home" action="" />
 		<menu name="Pessoas" controller="person" action="" role="ADMIN">
 			<menus>
-				<menu name="Pessoas Cadastradas" controller="person" action="" role="ADMIN"></menu>
-				<menu name="Nova Pessoa" controller="person" action="new" role="ADMIN"></menu>
+				<menu name="Pessoas Cadastradas" controller="person" action="" role="ADMIN" />
+				<menu name="Nova Pessoa" controller="person" action="new" role="ADMIN" />
 			</menus>
 		</menu>
-		<menu name="Alguma Coisa" controller="algumaCoisa" action="" role="USER">
+		<menu name="Pessoas" controller="person" action="" role="PROFESSOR">
 			<menus>
-				<menu name="Nova Pessoa" controller="person" action="new"></menu>
+				<menu name="Pessoas Cadastradas" controller="person" action="" role="PROFESSOR" />
+				<menu name="Nova Pessoa" controller="person" action="new" role="PROFESSOR" />
+			</menus>
+		</menu>
+		<menu name="Treinos" controller="training" action="">
+			<menus>
+				<menu name="Equipamentos" controller="equipment" action="" role="ADMIN" />
+				<menu name="Exercícios" controller="exercise" action="" role="ADMIN" />
+				<menu name="Exercícios" controller="exercise" action="" role="PROFESSOR" />
+				<menu name="Treinos Cadastrados" controller="training" action="" />
+			</menus>
+		</menu>
+		<menu name="Dietas" controller="diet" action="">
+			<menus>
+				<menu name="Alimentos" controller="food" action="" role="ADMIN" />
+				<menu name="Alimentos" controller="food" action="" role="PROFESSOR" />
+				<menu name="Dietas Cadastradas" controller="diet" action="" />
 			</menus>
 		</menu>
 	</menus>

@@ -32,7 +32,7 @@
 						<f:icon-button icon="icon-pencil" title="Editar" controller="person" action="edit" parameters="id=${person.id}" />
 					</td>
 					<td>
-						<f:icon-button icon="icon-trash" title="Editar" controller="person" action="delete" parameters="id=${person.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						<f:icon-button icon="icon-trash" title="Remover" controller="person" action="delete" parameters="id=${person.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
 					</td>
 				</tr>
 			</c:forEach>
