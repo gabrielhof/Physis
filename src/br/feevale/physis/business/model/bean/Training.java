@@ -2,12 +2,8 @@ package br.feevale.physis.business.model.bean;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import org.hibernate.annotations.ManyToAny;
 
 import br.feevale.physis.model.Bean;
 

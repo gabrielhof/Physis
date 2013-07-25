@@ -81,7 +81,8 @@ public class PersonController implements DefaultController {
 	public void deleteAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		if (StringUtils.isNotBlank(id)) {
-			Person person = personDAO.get(Integer.parseInt(id));
+			Person person = new Person();
+			person.setId(new Integer(id));
 			
 			personDAO.delete(person);
 		}

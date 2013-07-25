@@ -8,8 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.feevale.physis.annotation.Request;
 import br.feevale.physis.builder.view.ViewBuilder;
-import br.feevale.physis.business.model.bean.Equipment;
+import br.feevale.physis.business.model.bean.Exercise;
 import br.feevale.physis.business.model.dao.EquipmentDAO;
+import br.feevale.physis.business.model.dao.ExerciseDAO;
 import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.converter.RequestConverter;
 import br.feevale.physis.converter.impl.BeanRequestConverter;
@@ -18,32 +19,37 @@ import br.feevale.physis.util.RequestUtils;
 import br.feevale.physis.util.StringUtils;
 import br.feevale.physis.view.View;
 
-public class EquipmentController implements DefaultController {
+public class ExerciseController implements DefaultController {
 
+	@Resource
+	private ExerciseDAO exerciseDAO;
+	
 	@Resource
 	private EquipmentDAO equipmentDAO;
 	
 	@Override
 	public void indexAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<Equipment> equipments = equipmentDAO.listAll();
+		List<Exercise> exercises = exerciseDAO.listAll();
 		
-		View view = ViewBuilder.build("equipment", "EquipmentList");
-		view.setVariable("equipments", equipments);
+		View view = ViewBuilder.build("exercise", "exerciseList");
+		view.setVariable("exercises", exercises);
 		view.forward(request, response);
 	}
 	
 	public void newAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		View view = ViewBuilder.build("equipment", "equipment");
+		View view = ViewBuilder.build("exercise", "exercise");
+		view.setVariable("equipments", equipmentDAO.listAll());
 		view.forward(request, response);
 	}
 	
 	public void editAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		View view = ViewBuilder.build("equipment", "equipment");
+		View view = ViewBuilder.build("exercise", "exercise");
+		view.setVariable("equipments", equipmentDAO.listAll());
 		
 		String id = request.getParameter("id");
 		if (StringUtils.isNotBlank(id)) {
-			Equipment equipment = equipmentDAO.get(Integer.parseInt(id));
-			view.setVariable("equipment", equipment);
+			Exercise exercise = exerciseDAO.get(Integer.parseInt(id));
+			view.setVariable("exercise", exercise);
 		}
 		
 		view.forward(request, response);
@@ -51,24 +57,30 @@ public class EquipmentController implements DefaultController {
 
 	@Request(methods=RequestMethod.POST)
 	public void saveAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		RequestConverter<Equipment> converter = new BeanRequestConverter<Equipment>(request, Equipment.class);
-		Equipment equipment  = converter.convert();
+		RequestConverter<Exercise> converter = new BeanRequestConverter<Exercise>(request, Exercise.class);
+		Exercise exercise = converter.convert();
 		
-		equipmentDAO.save(equipment);
-		RequestUtils.redirect(request, response, "equipment");
+		if (exercise.getEquipment().getId() != null) {
+			exercise.setEquipment(equipmentDAO.get(exercise.getEquipment().getId()));
+		} else {
+			exercise.setEquipment(null);
+		}
+		
+		exerciseDAO.save(exercise);
+		RequestUtils.redirect(request, response, "exercise");
 	}
 	
 	@Request(methods=RequestMethod.POST)
 	public void deleteAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		if (StringUtils.isNotBlank(id)) {
-			Equipment equipament = new Equipment();
-			equipament.setId(new Integer(id));
+			Exercise exercise = new Exercise();
+			exercise.setId(new Integer(id));
 			
-			equipmentDAO.delete(equipament);
+			exerciseDAO.delete(exercise);
 		}
 		
-		RequestUtils.redirect(request, response, "equipment");
+		RequestUtils.redirect(request, response, "exercise");
 	}
 	
 }

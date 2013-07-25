@@ -3,7 +3,8 @@
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
 <%@ attribute name="id" required="true" type="java.lang.String" description="HTML Id" %>
-<%@ attribute name="enumClass" required="true" type="java.lang.String" description="Enum Class" %>
+<%@ attribute name="enumClass" type="java.lang.String" description="Enum Class" %>
+<%@ attribute name="beans" type="java.util.Collection" description="Bean List" %>
 <%@ attribute name="value" type="java.lang.String" description="HTML Value" %>
 <%@ attribute name="styleClass" type="java.lang.String" description="HTML Class" %>
 <%@ attribute name="style" type="java.lang.String" description="CSS Style" %>
@@ -46,18 +47,35 @@
 	</c:otherwise>
 </c:choose>
 
-<c:set var="options" value="${f:getEnumValues(enumClass)}"/>
 <select id="${id}" name="${id}" ${htmlClass} ${htmlStyle} ${htmlRequired} ${htmlReadonly} >
 	<option value="">Selecione</option>
 
-	<c:forEach items="${options}" var="option">
-		<c:choose>
-			<c:when test="${option.value eq value}">
-				<option value="${option.value}" selected="selected">${option.toString()}</option>
-			</c:when>
-			<c:otherwise>
-				<option value="${option.value}">${option.toString()}</option>
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+	<c:choose>
+		<c:when test="${not empty enumClass}">
+			<c:set var="options" value="${f:getEnumValues(enumClass)}"/>
+		
+			<c:forEach items="${options}" var="option">
+				<c:choose>
+					<c:when test="${option.value eq value}">
+						<option value="${option.value}" selected="selected">${option.toString()}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${option.value}">${option.toString()}</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</c:when>
+		<c:when test="${not empty beans}">
+			<c:forEach items="${beans}" var="bean">
+				<c:choose>
+					<c:when test="${bean.id eq value}">
+						<option value="${bean.id}" selected="selected">${bean.toUserString()}</option>
+					</c:when>
+					<c:otherwise>
+						<option value="${bean.id}">${bean.toUserString()}</option>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+		</c:when>
+	</c:choose>
 </select>

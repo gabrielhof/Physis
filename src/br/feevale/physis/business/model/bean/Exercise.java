@@ -37,21 +37,21 @@ public class Exercise extends Bean {
 		this.name = name;
 	}
 
-	@ManyToOne @JoinColumn(name="equipment_id", nullable=true)
-	public Equipment getEquipment() {
-		return equipment;
-	}
-	
-	public void setEquipment(Equipment equipment) {
-		this.equipment = equipment;
-	}
-	
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	@ManyToOne @JoinColumn(name="equipment_id", nullable=true, updatable=true)
+	public Equipment getEquipment() {
+		return equipment;
+	}
+	
+	public void setEquipment(Equipment equipment) {
+		this.equipment = equipment;
 	}
 
 	@Override

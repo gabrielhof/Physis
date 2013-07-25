@@ -26,7 +26,15 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 	@Override
 	public T save(T bean) throws Exception {
 		Session session = getHibernateSession();
-		session.saveOrUpdate(bean);
+		
+		Transaction t = session.beginTransaction();
+		try {
+			session.saveOrUpdate(bean);
+			session.flush();
+			t.commit();
+		} catch (Exception e) {
+			t.rollback();
+		}
 		
 		session.close();
 		
@@ -39,9 +47,13 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 		
 		Transaction transaction = session.beginTransaction();
 		
-		session.delete(session.get(getBeanClass(), bean.getId()));
-		session.flush();
-		transaction.commit();
+		try {
+			session.delete(session.get(getBeanClass(), bean.getId()));
+			session.flush();
+			transaction.commit();
+		} catch (Exception e) {
+			transaction.rollback();
+		}
 		
 		session.close();
 		
