@@ -7,6 +7,7 @@ function onDocumentReady() {
 	$(".carousel").carousel();
 	$(".back-to-top").click(backToTop);
 	
+	transformerNumericFields();
 	transformDateFields();
 	applyMasks();
 	
@@ -26,6 +27,11 @@ function transformDateFields() {
 		$(this).datepicker({language:"pt-BR", format: "dd/mm/yyyy", forceParse: false});
 		$(this).change(validateDate);
 	});
+}
+
+function transformerNumericFields() {
+	$(".numeric").numeric({negative: false, decimal: false});
+	$(".decimal").numeric({negative: false, decimal: ","});
 }
 
 function applyMasks() {

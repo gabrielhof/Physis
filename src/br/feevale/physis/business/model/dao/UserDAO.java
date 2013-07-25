@@ -11,7 +11,7 @@ import br.feevale.physis.util.StringUtils;
 public class UserDAO extends HibernateDAOImpl<User> {
 
 	@Override
-	protected Class<User> getBeanClass() {
+	public Class<User> getBeanClass() {
 		return User.class;
 	}
 

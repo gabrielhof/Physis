@@ -8,7 +8,7 @@ public class DoubleConverter implements Converter<Double, String> {
 	@Override
 	public Double convert(Class<Double> returnedClass, String value) {
 		if (StringUtils.isNotBlank(value)) {
-			return Double.parseDouble(value);
+			return Double.parseDouble(value.replace(",", "."));
 		}
 		
 		return null;

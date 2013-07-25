@@ -50,6 +50,7 @@
 		
 		<f:script src="jquery-1.9.1.min.js" />
 		<f:script src="bootstrap.min.js" />
+		<f:script src="jquery.numeric.js" />
 		<f:script src="jquery.maskedinput.min.js" />
 		<f:script src="bootstrap-datepicker.js" />
 		<f:script src="locale/bootstrap-datepicker.pt-BR.js" />

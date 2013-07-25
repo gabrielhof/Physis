@@ -15,7 +15,19 @@
 <c:choose>
 	<c:when test="${type eq 'date'}">
 		<c:set var="styleClass" value="date ${styleClass}"/>
-		<c:set var="type" value="text"/>
+		<c:set var="type" value="number"/>
+	</c:when>
+	<c:when test="${type eq 'numeric'}">
+		<c:set var="styleClass" value="numeric ${styleClass}"/>
+		<c:set var="type" value="number"/>
+	</c:when>
+	<c:when test="${type eq 'decimal'}">
+		<c:set var="styleClass" value="decimal ${styleClass}"/>
+		<c:set var="type" value="number"/>
+		
+		<c:if test="${not empty value}">
+			<c:set var="value" value="${value.replace('.', ',')}" />
+		</c:if>
 	</c:when>
 </c:choose>
 

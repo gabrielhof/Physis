@@ -85,9 +85,9 @@ public class Controller {
 				Method method = null;
 				
 				try {
-					method = controllerClass.getDeclaredMethod(action + settings.getActionSuffix(), HttpServletRequest.class, HttpServletResponse.class);
+					method = ReflectionUtils.getMethod(controllerClass, action + settings.getActionSuffix(), HttpServletRequest.class, HttpServletResponse.class);
 				} catch (Exception e) {
-					method = controllerClass.getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class);
+					method = ReflectionUtils.getMethod(controllerClass, action, HttpServletRequest.class, HttpServletResponse.class);
 				}
 		
 				validateAction(method, request);

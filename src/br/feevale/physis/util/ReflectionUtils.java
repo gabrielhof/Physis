@@ -52,4 +52,14 @@ public class ReflectionUtils {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static Method getMethod(Class<?> clazz, String methodName, Class<?>... methodParameters) throws Exception {
+		try {
+			return clazz.getDeclaredMethod(methodName, methodParameters);
+		} catch (NoSuchMethodException e) {
+			return clazz.getMethod(methodName, methodParameters);
+		} catch (SecurityException e) {
+			throw e;
+		}
+	}
 }

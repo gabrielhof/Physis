@@ -17,7 +17,7 @@ public class PersonDAO extends HibernateDAOImpl<Person>{
 	}
 	
 	@Override
-	protected Class<Person> getBeanClass() {
+	public Class<Person> getBeanClass() {
 		return Person.class;
 	}
 	

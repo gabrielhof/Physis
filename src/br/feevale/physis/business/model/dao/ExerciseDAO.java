@@ -6,7 +6,7 @@ import br.feevale.physis.dao.HibernateDAOImpl;
 public class ExerciseDAO extends HibernateDAOImpl<Exercise> {
 
 	@Override
-	protected Class<Exercise> getBeanClass() {
+	public Class<Exercise> getBeanClass() {
 		return Exercise.class;
 	}
 

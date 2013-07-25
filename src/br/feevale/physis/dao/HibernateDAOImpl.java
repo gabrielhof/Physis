@@ -97,6 +97,6 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 		return list;
 	}
 	
-	protected abstract Class<T> getBeanClass();
+	public abstract Class<T> getBeanClass();
 
 }
