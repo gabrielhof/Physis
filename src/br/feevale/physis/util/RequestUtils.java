@@ -18,13 +18,13 @@ public class RequestUtils {
 		response.sendRedirect(String.format("%s%s/%s/%s", request.getContextPath(), request.getServletPath(), controller, action));
 	}
 	
-	public static Map<String, String> getRequestParameters(HttpServletRequest request) {
-		Map<String, String> parameters = new HashMap<String, String>();
+	public static Map<String, String[]> getRequestParameters(HttpServletRequest request) {
+		Map<String, String[]> parameters = new HashMap<String, String[]>();
 		
 		Enumeration<String> requestParamNames = request.getParameterNames();
 		while (requestParamNames.hasMoreElements()) {
 			String paramName = requestParamNames.nextElement();
-			parameters.put(paramName, request.getParameter(paramName));
+			parameters.put(paramName, request.getParameterValues(paramName));
 		}
 		
 		return parameters;

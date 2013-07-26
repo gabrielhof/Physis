@@ -10,7 +10,6 @@
 		
 		<title>Physis</title>
 	
-		<link href="${contextPath}/assets/css/datepicker.css" rel="stylesheet"/>
 		<link href="${contextPath}/assets/css/style.css" rel="stylesheet"/>
 		
 		<script type="text/javascript">
@@ -52,6 +51,7 @@
 		<f:script src="bootstrap.min.js" />
 		<f:script src="jquery.numeric.js" />
 		<f:script src="jquery.maskedinput.min.js" />
+		<f:script src="bootstrap-select.min.js" />
 		<f:script src="bootstrap-datepicker.js" />
 		<f:script src="locale/bootstrap-datepicker.pt-BR.js" />
 		<f:script src="jquery.blockUI.js" />

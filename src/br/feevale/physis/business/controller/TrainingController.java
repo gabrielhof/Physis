@@ -8,6 +8,8 @@ import br.feevale.physis.business.model.bean.Training;
 import br.feevale.physis.business.model.dao.ExerciseDAO;
 import br.feevale.physis.business.model.dao.TrainingDAO;
 import br.feevale.physis.controller.CrudController;
+import br.feevale.physis.converter.RequestConverter;
+import br.feevale.physis.converter.impl.BeanRequestConverter;
 import br.feevale.physis.dao.HibernateDAOImpl;
 import br.feevale.physis.view.View;
 
@@ -26,7 +28,10 @@ public class TrainingController extends CrudController<Training>{
 	
 	@Override
 	public void saveAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(request.getParameterValues("training.trainingExercise.exercise.id"));
+		RequestConverter<Training> converter = new BeanRequestConverter<Training>(request, Training.class);
+		Training bean = converter.convert();
+		
+		System.out.println(bean);
 	}
 	
 	@Override

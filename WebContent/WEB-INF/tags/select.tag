@@ -48,7 +48,7 @@
 </c:choose>
 
 <select id="${id}" name="${id}" ${htmlClass} ${htmlStyle} ${htmlRequired} ${htmlReadonly} >
-	<option value="">Selecione</option>
+	<option value="" selected="selected">Selecione</option>
 
 	<c:choose>
 		<c:when test="${not empty enumClass}">

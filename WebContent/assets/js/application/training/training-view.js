@@ -13,7 +13,7 @@ function showExerciseDialog(title) {
 }
 
 function onExerciseDialogHide() {
-	$("form#training-exercise-form")[0].reset();
+	resetForm($("form#training-exercise-form"));
 }
 
 function saveExerciseAction() {
