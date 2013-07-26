@@ -1,12 +1,14 @@
 package br.feevale.physis.business.model.bean;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import br.feevale.physis.model.Bean;
 
@@ -56,7 +58,8 @@ public class TrainingExercise extends Bean {
 		this.weight = weight;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL) @JoinColumn(name="training_id", nullable=false)
+	@ManyToOne @JoinColumn(name="training_id", nullable=false)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	public Training getTraining() {
 		return training;
 	}

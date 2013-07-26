@@ -15,7 +15,7 @@
 <c:choose>
 	<c:when test="${type eq 'date'}">
 		<c:set var="styleClass" value="date ${styleClass}"/>
-		<c:set var="type" value="number"/>
+		<c:set var="type" value="text"/>
 	</c:when>
 	<c:when test="${type eq 'numeric'}">
 		<c:set var="styleClass" value="numeric ${styleClass}"/>

@@ -126,6 +126,8 @@ function confirmDialog(that, message, title, doPost) {
 	modalDiv.on("hidden", onDialogHideEvent);
 	modalDiv.modal("show");
 	
+	yesDialogButton.focus();
+	
 	var waitSomethingToHappenWithThisDialog = "";
 	waitSomethingToHappenWithThisDialog = function () {
 		if (!dialogWasCanceled && !dialogWasConfirmed) {

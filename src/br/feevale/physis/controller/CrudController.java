@@ -52,8 +52,9 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 		T bean  = converter.convert();
 		
 		beforeSave(bean);
-		
 		getDao().save(bean);
+		afterSave(bean);
+		
 		RequestUtils.redirect(request, response, getControllerName());
 	}
 	
@@ -83,4 +84,5 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 	
 	protected void buildVariables(View view) throws Exception {}
 	protected void beforeSave(T bean) throws Exception {}
+	protected void afterSave(T bean) throws Exception {}
 }

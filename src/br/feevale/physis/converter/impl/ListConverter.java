@@ -64,6 +64,10 @@ public class ListConverter implements Converter<List<?>, Map<String, Object>>{
 			Object value = map.get(key);
 			
 			if (value != null) {
+				if (value instanceof String) {
+					value = new String[] {(String) value};
+				}
+				
 				if (value.getClass().isArray()) {
 					String[] arrayValue = (String[]) value;
 					for (int i = 0; i < arrayValue.length; i++) {

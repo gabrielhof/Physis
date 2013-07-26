@@ -36,15 +36,15 @@
 							</td>
 							<td>
 								${trainingExercise.series}
-								<f:input id="training.trainingExercises.trainingExercise.series" type="hidden" value="${training.trainingExercise.series}"/>
+								<f:input id="training.trainingExercises.trainingExercise.series" type="hidden" value="${trainingExercise.series}"/>
 							</td>
 							<td>
 								${trainingExercise.repetitions}
-								<f:input id="training.trainingExercises.trainingExercise.repetitions" type="hidden" value="${training.trainingExercise.repetitions}"/>
+								<f:input id="training.trainingExercises.trainingExercise.repetitions" type="hidden" value="${trainingExercise.repetitions}"/>
 							</td>
 							<td>
 								${trainingExercise.weight}
-								<f:input id="training.trainingExercises.trainingExercise.weight" type="hidden" value="${training.trainingExercise.weight}"/>
+								<f:input id="training.trainingExercises.trainingExercise.weight" type="hidden" value="${trainingExercise.weight}"/>
 							</td>
 							<td>
 								<a title="Editar" href="javascript:void(0);" onclick="return editExerciseAction(this);">
@@ -52,7 +52,7 @@
 								</a>
 							</td>
 							<td>
-								<a title="Editar" href="javascript:void(0);" onclick="return removeExerciseAction(this);">
+								<a title="Remover" href="javascript:void(0);" onclick="return removeExerciseAction(this);">
 									<i class="icon-trash"></i>
 								</a>
 							</td>

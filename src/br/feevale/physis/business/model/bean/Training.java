@@ -2,13 +2,15 @@ package br.feevale.physis.business.model.bean;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import br.feevale.physis.model.Bean;
 
@@ -39,7 +41,8 @@ public class Training extends Bean {
 		this.name = name;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="training", orphanRemoval=true)
+	@OneToMany(fetch=FetchType.EAGER, mappedBy="training", orphanRemoval=true)
+	@Cascade({CascadeType.SAVE_UPDATE})
 	public List<TrainingExercise> getTrainingExercises() {
 		return trainingExercises;
 	}
