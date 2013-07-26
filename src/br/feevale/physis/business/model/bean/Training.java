@@ -2,11 +2,17 @@ package br.feevale.physis.business.model.bean;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import br.feevale.physis.model.Bean;
 
+@Entity @Table(name="training")
 public class Training extends Bean {
 
 	private static final long serialVersionUID = -4290520646265463545L;
@@ -14,7 +20,7 @@ public class Training extends Bean {
 	private Integer id;
 	private String name;
 	
-	private List<Exercise> exercises;
+	private List<TrainingExercise> trainingExercises;
 
 	@Id @GeneratedValue @Override
 	public Integer getId() {
@@ -33,17 +39,18 @@ public class Training extends Bean {
 		this.name = name;
 	}
 
-	public List<Exercise> getExercises() {
-		return exercises;
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="training")
+	public List<TrainingExercise> getTrainingExercises() {
+		return trainingExercises;
 	}
 	
-	public void setExercises(List<Exercise> exercises) {
-		this.exercises = exercises;
+	public void setTrainingExercises(List<TrainingExercise> trainingExercises) {
+		this.trainingExercises = trainingExercises;
 	}
 	
 	@Override
 	public String toUserString() {
-		return null;
+		return getName();
 	}
 
 }
