@@ -7,6 +7,7 @@
 <%@ attribute name="title" type="java.lang.String" description="Title" %>
 <%@ attribute name="onclick" type="java.lang.String" description="javascript event" %>
 <%@ attribute name="parameters" type="java.lang.String" description="javascript event" %>
+<%@ attribute name="target" type="java.lang.String" description="Target" %>
 
 <c:choose>
 	<c:when test="${not empty onclick}">
@@ -21,6 +22,10 @@
 	<c:set var="parameters" value="?${parameters}"/>
 </c:if>
 
-<a href="${appPath}/${controller}/${action}${parameters}" ${onclickEvent} title="${title}">
+<c:if test="${not empty target}">
+	<c:set var="target" value="target=\"${target}\""/>
+</c:if>
+
+<a href="${appPath}/${controller}/${action}${parameters}" ${onclickEvent} title="${title}" ${target}>
 	<i class="${icon}"></i>
 </a>

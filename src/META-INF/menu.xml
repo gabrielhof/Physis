@@ -12,6 +12,7 @@
 			<menus>
 				<menu name="Pessoas Cadastradas" controller="person" action="" role="PROFESSOR" />
 				<menu name="Nova Pessoa" controller="person" action="new" role="PROFESSOR" />
+				
 			</menus>
 		</menu>
 		<menu name="Treinos" controller="training" action="">

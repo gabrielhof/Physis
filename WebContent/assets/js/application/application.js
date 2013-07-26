@@ -75,6 +75,7 @@ function scrollTo(obj) {
  */
 
 function confirmDialog(that, message, title, doPost) {
+	var target = $(that).attr("target");
 	var href = $(that).attr("href");
 	
 	var dialogWasConfirmed = false;
@@ -134,9 +135,13 @@ function confirmDialog(that, message, title, doPost) {
 			setTimeout(waitSomethingToHappenWithThisDialog, 500);
 		} else if (dialogWasConfirmed) {
 			if (typeof(doPost) != "undefined" && doPost) {
-				executeRequest("post", href);
+				executeRequest("post", href, target);
 			} else {
-				window.location = href;
+				if (isStringNotBlank(target)) {
+					window.open(href, target);
+				} else {
+					window.location = href;
+				}
 			}
 		}
 	};
@@ -149,11 +154,15 @@ function confirmDialog(that, message, title, doPost) {
 /**
  * HTTP
  */
-function executeRequest(method, url) {
+function executeRequest(method, url, target) {
 	url = url.split("?");
 	var form = $("<form class='hide'></form>");
 	form.attr("method", method);
 	form.attr("action", url[0]);
+	
+	if (isStringNotBlank(target)) {
+		form.attr("target", target);
+	}
 	
 	if (url.length > 1) {
 		var parameters = url[1].split("&");
