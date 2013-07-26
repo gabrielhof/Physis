@@ -1,7 +1,5 @@
 package br.feevale.physis.business.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -25,9 +23,9 @@ import org.jrimum.domkee.financeiro.banco.febraban.SacadorAvalista;
 import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
-import br.feevale.physis.builder.view.ViewBuilder;
 import br.feevale.physis.business.model.bean.Payment;
 import br.feevale.physis.business.model.dao.PaymentDAO;
+import br.feevale.physis.business.model.dao.PersonDAO;
 import br.feevale.physis.controller.CrudController;
 import br.feevale.physis.dao.HibernateDAOImpl;
 import br.feevale.physis.view.View;
@@ -36,6 +34,10 @@ public class PaymentController extends CrudController<Payment> {
 
 	@Resource
 	private PaymentDAO paymentDAO;
+	
+	@Resource
+	private PersonDAO personDAO;
+
 	
 	@Override
 	protected HibernateDAOImpl<Payment> getDao() {
@@ -67,25 +69,21 @@ public class PaymentController extends CrudController<Payment> {
 		return "payment";
 	}
 
+	@Override
+	protected void buildVariables(View view) throws Exception {
+		view.setVariable("people", personDAO.listAll());
+	}
 
 	protected String generateSlipBank(){
-		System.out.println("testenogenerate e não no get e nem no action");
-		return "generateSlipBank";
+		// Apenas voltar para a lista
+		return "paymentList";
 	}	
 	
 	protected String getGenerateSlipBank(){
-		return "generateSlipBank";
+		return "paymentList";
 	}
 
 	public void generateSlipBankAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		View view = ViewBuilder.build(getControllerName(), "generateSlipBank");
-		view.forward(request, response);		
-
-		geraBoleto();		
-		
-	}
-	
-	private void geraBoleto(){		
 		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
 
         /*
@@ -172,20 +170,8 @@ public class PaymentController extends CrudController<Payment> {
         // pasta do projeto. Outros exemplos:
         // WINDOWS: boletoViewer.getAsPDF("C:/Temp/MeuBoleto.pdf");
         // LINUX: boletoViewer.getAsPDF("/home/temp/MeuBoleto.pdf");
-        File arquivoPdf = boletoViewer.getPdfAsFile("MeuPrimeiroBoleto.pdf");
-
-        // Mostrando o boleto gerado na tela.
-        mostreBoletoNaTela(arquivoPdf);		
-	}	
-	
-	//exibe arquivo na tela
-	private static void mostreBoletoNaTela(File arquivoBoleto) {	
-	    java.awt.Desktop desktop = java.awt.Desktop.getDesktop();	    
-	    try {
-	            desktop.open(arquivoBoleto);
-	    } catch (IOException e) {
-	            e.printStackTrace();
-	    }
-	}		
-	
+        byte[] data = boletoViewer.getPdfAsByteArray();
+        response.setContentType("application/pdf");
+        response.getOutputStream().write(data);
+	}
 }

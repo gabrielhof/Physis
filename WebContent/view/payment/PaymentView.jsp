@@ -8,10 +8,11 @@
 <f:form controller="payment" action="save" method="post" validation="defaultFormValidation">
 	<f:fieldset title="Dados Gerais">
 		<f:input id="payment.id" type="hidden" value="${payment.id}" />
-		<f:field label="Data de emissão" required="true" type="text" id="payment.issueDate" value="${payment.issueDate}"/>
+		<f:field label="Data de emissão" required="true" type="date" id="payment.issueDate" value="${payment.issueDate}"/>
 		<f:field label="Valor R$" required="true" type="double" id="payment.value" value="${payment.value}" />
 		<f:field label="Data de pagamento" required="false" type="date" id="payment.paymentDate" value="${payment.paymentDate}" />
-		<f:field label="Pessoa" required="true" type="numeric" id="payment.person.id" value="${payment.person.id}" />	
+		
+		<f:select-field label="Pessoa" beans="${people}" id="payment.person.id" value="${payment.person.id}" />
 	</f:fieldset>
 	
 	<f:buttonset>

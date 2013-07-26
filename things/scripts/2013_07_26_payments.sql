@@ -1,12 +1,10 @@
--- MySQL
-
 CREATE TABLE payments (
 	id INT AUTO_INCREMENT PRIMARY KEY,
-	issue_date VARCHAR(08) NOT NULL,
-	payment_date VARCHAR(08) NULL,
+	issue_date DATE NOT NULL,
+	payment_date DATE NULL,
 	value DECIMAL(10, 2) NULL,
-	user_id INT NOT NULL
+	person_id INT NOT NULL
 ) ENGINE=InnoDB;
 
-ALTER TABLE payments ADD CONSTRAINT payment_user_fk FOREIGN KEY (user_id) REFERENCES users(id);
-CREATE INDEX payment_user_fk_i ON payments(user_id);
+ALTER TABLE payments ADD CONSTRAINT payment_person_fk FOREIGN KEY (person_id) REFERENCES people(id);
+CREATE INDEX payment_person_fk_i ON payments(person_id);

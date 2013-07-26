@@ -72,6 +72,9 @@ public class Payment extends Bean {
 	public Person getPerson() {
 		return person;
 	}
+	public void setPerson(Person person) {
+		this.person = person;
+	}
 	
 	public void setEquipment(Person person) {
 		this.person = person;

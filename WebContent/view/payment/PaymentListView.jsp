@@ -27,13 +27,16 @@
 					<td>${payment.issueDate}</td>
 					<td>${payment.paymentDate}</td>
 					<td>${payment.value}</td>
-					<td>${payment.person.name}</td>
+<%-- 					<td>${payment.person.name}</td> --%>
 					<td>
 						<f:icon-button icon="icon-pencil" title="Editar" controller="payment" action="edit" parameters="id=${payment.id}" />
 					</td>
 					<td>
-						<f:icon-button icon="icon-trash" title="Remover" controller="payment" action="delete" parameters="id=${payment.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						<f:icon-button icon="icon-trash" title="Remover" controller="payment" action="delete" parameters="id=${payment.id}" onclick="return confirmDialog(this, 'Tem certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
 					</td>
+					<td>
+						<f:icon-button icon="icon-print" target="_blank" title="Gerar Boleto" controller="payment" action="generateSlipBank" parameters="id=${payment.id}" onclick="return confirmDialog(this, 'Tem certeza que deseja gerar o boleto ?', 'Gerar boleto?', true);"/>
+					</td>					
 				</tr>
 			</c:forEach>
 		</c:if>
