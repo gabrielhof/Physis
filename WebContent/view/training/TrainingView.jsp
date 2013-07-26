@@ -47,12 +47,12 @@
 								<f:input id="training.trainingExercises.trainingExercise.weight" type="hidden" value="${trainingExercise.weight}"/>
 							</td>
 							<td>
-								<a title="Editar" href="javascript:void(0);" onclick="return editExerciseAction(this);">
+								<a title="Editar" href="javascript:void(0);" class="edit-training-exercise">
 									<i class="icon-pencil"></i>
 								</a>
 							</td>
 							<td>
-								<a title="Remover" href="javascript:void(0);" onclick="return removeExerciseAction(this);">
+								<a title="Remover" href="javascript:void(0);" class="remove-training-exercise">
 									<i class="icon-trash"></i>
 								</a>
 							</td>

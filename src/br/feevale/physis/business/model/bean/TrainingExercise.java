@@ -7,9 +7,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-
 import br.feevale.physis.model.Bean;
 
 @Entity @Table(name="training_exercises")
@@ -59,7 +56,6 @@ public class TrainingExercise extends Bean {
 	}
 	
 	@ManyToOne @JoinColumn(name="training_id", nullable=false)
-	@Cascade({CascadeType.SAVE_UPDATE})
 	public Training getTraining() {
 		return training;
 	}

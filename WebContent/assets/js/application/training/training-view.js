@@ -1,5 +1,18 @@
 var currentRow = null;
 
+loadTrainingExercise();
+
+function loadTrainingExercise() {
+	if (typeof($) != "undefined") {
+		$(document).ready(function() {
+			$(".edit-training-exercise").click(editExerciseAction);
+			$(".remove-training-exercise").click(removeExerciseAction);
+		});
+	} else {
+		setTimeout(loadTrainingExercise, 500);
+	}
+}
+
 function addExerciseAction() {
 	showExerciseDialog("Adicionar Exercício");
 	return false;
