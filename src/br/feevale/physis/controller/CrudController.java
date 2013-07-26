@@ -31,7 +31,7 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 		View view = ViewBuilder.build(getControllerName(), getViewName());
 		view.forward(request, response);
 	}
-	
+		
 	public void editAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		View view = ViewBuilder.build(getControllerName(), getViewName());
 		
