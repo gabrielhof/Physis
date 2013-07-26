@@ -10,6 +10,7 @@ function onDocumentReady() {
 	transformerNumericFields();
 	transformDateFields();
 	applyMasks();
+	transformPrettySelect();
 	
 	$("input.error").change(removeErrorFieldAction);
 }
@@ -39,6 +40,20 @@ function applyMasks() {
 		$(this).mask($(this).attr("mask"));
 	});
 }
+
+function transformPrettySelect() {
+	$("select").each(function () {
+		var selectedOption = $(this).val();
+		$(this).select2({placeholder: "Select", width: "resolve"});
+		$(this).select2("val", selectedOption);
+		
+		$(this).change(function() {
+			$(this).select2("val", $(this).val());
+		});
+	});
+}
+
+
 
 /**
  * Scrolling Actions
@@ -110,6 +125,8 @@ function confirmDialog(that, message, title, doPost) {
 	
 	modalDiv.on("hidden", onDialogHideEvent);
 	modalDiv.modal("show");
+	
+	yesDialogButton.focus();
 	
 	var waitSomethingToHappenWithThisDialog = "";
 	waitSomethingToHappenWithThisDialog = function () {
@@ -346,6 +363,15 @@ function isStringBlank(s) {
 
 function isStringNotBlank(s) {
 	return !isStringBlank(s);
+}
+
+function resetForm(form) {
+	form.find("select").each(function() {
+		$(this).val("");
+		$(this).change();
+	});
+	
+	form[0].reset();
 }
 
 /**

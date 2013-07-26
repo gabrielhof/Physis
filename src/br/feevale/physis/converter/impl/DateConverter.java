@@ -1,5 +1,6 @@
 package br.feevale.physis.converter.impl;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ public class DateConverter implements Converter<Date, String> {
 	private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 	
 	@Override
-	public Date convert(Class<Date> returnedClass, String value) {
+	public Date convert(Class<Date> returnedClass, String value, Type genericType) {
 		try {
 			if (StringUtils.isNotBlank(value)) {
 				value = value.trim();

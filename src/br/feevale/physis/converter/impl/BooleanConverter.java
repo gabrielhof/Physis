@@ -1,5 +1,6 @@
 package br.feevale.physis.converter.impl;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class BooleanConverter implements Converter<Boolean, String> {
 	}
 	
 	@Override
-	public Boolean convert(Class<Boolean> returnedClass, String value) {
+	public Boolean convert(Class<Boolean> returnedClass, String value, Type genericType) {
 		if (StringUtils.isNotBlank(value)) {
 			value = value.trim().toLowerCase();
 			

@@ -15,7 +15,6 @@ import br.feevale.physis.util.StringUtils;
 
 public class BeanRequestConverter<T extends Bean> implements RequestConverter<T> {
 
-	private Map<String, String> parameters;
 	private Class<T> clazz;
 	private String var;
 	
@@ -29,15 +28,14 @@ public class BeanRequestConverter<T extends Bean> implements RequestConverter<T>
 		this(RequestUtils.getRequestParameters(request), clazz, var);
 	}
 	
-	public BeanRequestConverter(Map<String, String> parameters, Class<T> clazz, String var) {
-		this.parameters = parameters;
+	public BeanRequestConverter(Map<String, String[]> parameters, Class<T> clazz, String var) {
 		this.clazz = clazz;
 		this.var = var;
 		
-		mapProperties();
+		mapProperties(parameters);
 	}
 
-	private void mapProperties() {
+	private void mapProperties(Map<String, String[]> parameters) {
 		properties = new HashMap<String, Object>();
 		
 		Set<String> names = parameters.keySet();
@@ -48,7 +46,7 @@ public class BeanRequestConverter<T extends Bean> implements RequestConverter<T>
 	}
 	
 	@SuppressWarnings("unchecked")
-	private void mapRecursively(Map<String, Object> map, String param, String value) {
+	private void mapRecursively(Map<String, Object> map, String param, String[] value) {
 		String splited[] = param.split("\\.");
 		
 		if (splited.length > 1) {
@@ -58,7 +56,11 @@ public class BeanRequestConverter<T extends Bean> implements RequestConverter<T>
 			
 			mapRecursively((Map<String, Object>) map.get(splited[0]), param.replaceFirst("^[_0-9A-Za-z]*\\.", ""), value);
 		} else {
-			map.put(param, value);
+			if (value.length == 1) {
+				map.put(param, value[0]);
+			} else if (value.length > 1) {
+				map.put(param, value);
+			}
 		}
 	}
 
@@ -66,7 +68,7 @@ public class BeanRequestConverter<T extends Bean> implements RequestConverter<T>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public T convert() {
 		Converter converter = Converters.BEAN.getConverter();
-		return (T) converter.convert(clazz, properties.get(var));
+		return (T) converter.convert(clazz, properties.get(var), null);
 	}
 	
 }

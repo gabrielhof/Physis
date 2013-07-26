@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import br.feevale.physis.converter.Converter;
@@ -17,6 +18,7 @@ import br.feevale.physis.converter.impl.DoubleConverter;
 import br.feevale.physis.converter.impl.EnumDomainConverter;
 import br.feevale.physis.converter.impl.FloatConverter;
 import br.feevale.physis.converter.impl.IntegerConverter;
+import br.feevale.physis.converter.impl.ListConverter;
 import br.feevale.physis.converter.impl.LongConverter;
 import br.feevale.physis.converter.impl.ShortConverter;
 import br.feevale.physis.converter.impl.StringConverter;
@@ -37,6 +39,7 @@ public enum Converters {
 	STRING(String.class, new StringConverter()),
 	ENUM_DOMAIN(EnumDomain.class, new EnumDomainConverter()),
 	BEAN(Bean.class, new BeanConverter()),
+	LIST(List.class, new ListConverter())
 	;
 	
 	private static Map<Class<?>, Converters> extraConverters = new HashMap<Class<?>, Converters>();

@@ -29,11 +29,13 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 	
 	public void newAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		View view = ViewBuilder.build(getControllerName(), getViewName());
+		buildVariables(view);
 		view.forward(request, response);
 	}
 		
 	public void editAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		View view = ViewBuilder.build(getControllerName(), getViewName());
+		buildVariables(view);
 		
 		String id = request.getParameter(getIdVarName());
 		if (StringUtils.isNotBlank(id)) {
@@ -47,9 +49,12 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 	@Request(methods=RequestMethod.POST)
 	public void saveAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		RequestConverter<T> converter = new BeanRequestConverter<T>(request, getDao().getBeanClass());
-		T equipment  = converter.convert();
+		T bean  = converter.convert();
 		
-		getDao().save(equipment);
+		beforeSave(bean);
+		getDao().save(bean);
+		afterSave(bean);
+		
 		RequestUtils.redirect(request, response, getControllerName());
 	}
 	
@@ -76,4 +81,8 @@ public abstract class CrudController<T extends Bean> implements DefaultControlle
 	protected abstract String getControllerName();
 	protected abstract String getListViewName();
 	protected abstract String getViewName();
+	
+	protected void buildVariables(View view) throws Exception {}
+	protected void beforeSave(T bean) throws Exception {}
+	protected void afterSave(T bean) throws Exception {}
 }

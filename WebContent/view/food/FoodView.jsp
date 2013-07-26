@@ -22,6 +22,6 @@
 	
 	<f:buttonset>
 		<f:button label="Salvar" submit="true" styleClass="btn btn-primary"/>
-		<f:button label="Cancelar" controller="person" action="" onclick="return confirmDialog(this, 'Tem certeza que deseja cancelar esse registro?', 'Deseja cancelar?');" />
+		<f:button label="Cancelar" controller="food" action="" onclick="return confirmDialog(this, 'Tem certeza que deseja cancelar esse registro?', 'Deseja cancelar?');" />
 	</f:buttonset>
 </f:form>
