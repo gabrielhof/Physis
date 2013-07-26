@@ -37,7 +37,7 @@ function saveExerciseAction() {
 	}
 	
 	for (var i = 0; i < trainingExercise.length; i++) {
-		var property = "training.trainingExercise." + trainingExercise[i]["property"];
+		var property = "training.trainingExercises.trainingExercise." + trainingExercise[i]["property"];
 		var value = trainingExercise[i]["value"];
 		var textValue = trainingExercise[i]["textValue"];
 		
@@ -52,8 +52,8 @@ function saveExerciseAction() {
 		
 		if (i == 0) {
 			var idInput = $("<input type='hidden' />");
-			idInput.attr("id", "training.trainingExercise.id");
-			idInput.attr("name", "training.trainingExercise.id");
+			idInput.attr("id", "training.trainingExercises.trainingExercise.id");
+			idInput.attr("name", "training.trainingExercises.trainingExercise.id");
 			idInput.attr("value", id);
 			
 			td.append(idInput);
@@ -88,11 +88,11 @@ function editExerciseAction(that) {
 	var tr = that.parent().parent();
 	var form = $("form#training-exercise-form");
 	
-	form.find("#id").val(tr.find("#training\\.trainingExercise\\.id").val());
-	form.find("#exercise").val(tr.find("#training\\.trainingExercise\\.exercise\\.id").val());
-	form.find("#series").val(tr.find("#training\\.trainingExercise\\.series").val());
-	form.find("#repetitions").val(tr.find("#training\\.trainingExercise\\.repetitions").val());
-	form.find("#weight").val(tr.find("#training\\.trainingExercise\\.weight").val());
+	form.find("#id").val(tr.find("#training\\.trainingExercises\\.trainingExercise\\.id").val());
+	form.find("#exercise").val(tr.find("#training\\.trainingExercises\\.trainingExercise\\.exercise\\.id").val());
+	form.find("#series").val(tr.find("#training\\.trainingExercises\\.trainingExercise\\.series").val());
+	form.find("#repetitions").val(tr.find("#training\\.trainingExercises\\.trainingExercise\\.repetitions").val());
+	form.find("#weight").val(tr.find("#training\\.trainingExercises\\.trainingExercise\\.weight").val());
 	
 	showExerciseDialog("Editar Exercício");
 	

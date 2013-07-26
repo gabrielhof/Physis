@@ -39,7 +39,7 @@ public class Training extends Bean {
 		this.name = name;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="training")
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL, mappedBy="training", orphanRemoval=true)
 	public List<TrainingExercise> getTrainingExercises() {
 		return trainingExercises;
 	}

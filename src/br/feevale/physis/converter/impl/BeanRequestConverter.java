@@ -68,7 +68,7 @@ public class BeanRequestConverter<T extends Bean> implements RequestConverter<T>
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public T convert() {
 		Converter converter = Converters.BEAN.getConverter();
-		return (T) converter.convert(clazz, properties.get(var));
+		return (T) converter.convert(clazz, properties.get(var), null);
 	}
 	
 }

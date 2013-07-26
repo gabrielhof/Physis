@@ -1,16 +1,14 @@
 package br.feevale.physis.business.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import br.feevale.physis.business.model.bean.Training;
+import br.feevale.physis.business.model.bean.TrainingExercise;
 import br.feevale.physis.business.model.dao.ExerciseDAO;
 import br.feevale.physis.business.model.dao.TrainingDAO;
 import br.feevale.physis.controller.CrudController;
-import br.feevale.physis.converter.RequestConverter;
-import br.feevale.physis.converter.impl.BeanRequestConverter;
 import br.feevale.physis.dao.HibernateDAOImpl;
+import br.feevale.physis.util.CollectionUtils;
 import br.feevale.physis.view.View;
 
 public class TrainingController extends CrudController<Training>{
@@ -27,11 +25,13 @@ public class TrainingController extends CrudController<Training>{
 	}
 	
 	@Override
-	public void saveAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		RequestConverter<Training> converter = new BeanRequestConverter<Training>(request, Training.class);
-		Training bean = converter.convert();
-		
-		System.out.println(bean);
+	protected void beforeSave(Training bean) throws Exception {
+		if (CollectionUtils.isNotEmpty(bean.getTrainingExercises())) {
+			for (TrainingExercise te : bean.getTrainingExercises()) {
+				te.setTraining(bean);
+				te.setExercise(exerciseDAO.get(te.getExercise().getId()));
+			}
+		}
 	}
 	
 	@Override

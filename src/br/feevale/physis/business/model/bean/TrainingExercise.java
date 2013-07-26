@@ -1,5 +1,6 @@
 package br.feevale.physis.business.model.bean;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -55,7 +56,7 @@ public class TrainingExercise extends Bean {
 		this.weight = weight;
 	}
 	
-	@ManyToOne @JoinColumn(name="training_id", nullable=false)
+	@ManyToOne(cascade=CascadeType.ALL) @JoinColumn(name="training_id", nullable=false)
 	public Training getTraining() {
 		return training;
 	}
