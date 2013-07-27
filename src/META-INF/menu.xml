@@ -21,6 +21,7 @@
 				<menu name="Exercícios" controller="exercise" action="" role="ADMIN" />
 				<menu name="Exercícios" controller="exercise" action="" role="PROFESSOR" />
 				<menu name="Treinos Cadastrados" controller="training" action="" />
+				<menu name="Avaliações" controller="evaluation" action="" />
 			</menus>
 		</menu>
 		<menu name="Dietas" controller="diet" action="">

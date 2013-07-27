@@ -17,6 +17,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import resources.Resources;
 import br.feevale.physis.builder.controller.ActionControllerBuilder;
@@ -68,10 +70,24 @@ public class PermissionFilter implements Filter {
 					otherAction = "";
 				}
 				
-				String roleString = (String) xPath.evaluate(String.format("//*[@controller='%s' and (@action='%s' or @action='%s')]/@role", controller, action, otherAction), menuDocument.getDocumentElement(), XPathConstants.STRING);
-				Role role = Role.forValue(roleString);
+				boolean hasPermission = false;
 				
-				if (role == null || user.getRole().equals(role)) {
+				NodeList nodeList = (NodeList) xPath.evaluate(String.format("//*[@controller='%s' and (@action='%s' or @action='%s')]/@role", controller, action, otherAction), menuDocument.getDocumentElement(), XPathConstants.NODESET);
+				if (nodeList != null && nodeList.getLength() > 0) {
+					for (int i = 0; i < nodeList.getLength(); i++) {
+						Node node = nodeList.item(i);
+						Role role = Role.forValue(node.getTextContent());
+						
+						if (role == null || user.getRole().equals(role)) {
+							hasPermission = true;
+							break;
+						}
+					}
+				} else {
+					hasPermission = true;
+				}
+				
+				if (hasPermission) {
 					chain.doFilter(request, response);
 				} else {
 					throw new PermissionException("Permissão negada.");

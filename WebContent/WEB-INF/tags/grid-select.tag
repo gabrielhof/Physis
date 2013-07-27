@@ -3,7 +3,8 @@
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
 <%@ attribute name="id" required="true" type="java.lang.String" description="HTML Id" %>
-<%@ attribute name="enumClass" required="true" type="java.lang.String" description="Enum Class" %>
+<%@ attribute name="enumClass" type="java.lang.String" description="Enum Class" %>
+<%@ attribute name="beans" type="java.util.Collection" description="Bean List" %>
 <%@ attribute name="label" required="true" type="java.lang.String" description="Label" %>
 <%@ attribute name="value" type="java.lang.String" description="HTML Value" %>
 <%@ attribute name="styleClass" type="java.lang.String" description="HTML Class" %>
@@ -14,6 +15,6 @@
 <div class="span4 control-group">
 	<label class="control-label" for="${id}">${label}:${not empty required and required ? "<span class='red'>*</span>" : ""}</label>
 	<div class="controls">
-		<f:select enumClass="${enumClass}" id="${id}" value="${value}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" />
+		<f:select beans="${beans}" enumClass="${enumClass}" id="${id}" value="${value}" styleClass="${styleClass}" style="${style}" required="${required}" readonly="${readonly}" />
 	</div>
 </div>

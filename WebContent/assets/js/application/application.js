@@ -29,7 +29,7 @@ function transformDateFields() {
 		}
 		
 		$(this).mask("99/99/9999");
-		$(this).datepicker({language:"pt-BR", format: "dd/mm/yyyy", forceParse: false});
+		$(this).datepicker({language:"pt-BR", format: "dd/mm/yyyy", forceParse: false, autoclose: true});
 		$(this).change(validateDate);
 	});
 }
@@ -128,10 +128,13 @@ function confirmDialog(that, message, title, doPost) {
 		modalDiv.remove();
 	};
 	
-	modalDiv.on("hidden", onDialogHideEvent);
-	modalDiv.modal("show");
+	var onDialogShowEvent = function() {
+		yesDialogButton.focus();
+	};
 	
-	yesDialogButton.focus();
+	modalDiv.on("hidden", onDialogHideEvent);
+	modalDiv.on("shown", onDialogShowEvent);
+	modalDiv.modal("show");
 	
 	var waitSomethingToHappenWithThisDialog = "";
 	waitSomethingToHappenWithThisDialog = function () {

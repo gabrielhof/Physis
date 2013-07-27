@@ -12,6 +12,7 @@ import br.feevale.physis.business.model.bean.Person;
 import br.feevale.physis.business.model.bean.User;
 import br.feevale.physis.business.model.dao.PersonDAO;
 import br.feevale.physis.business.model.dao.UserDAO;
+import br.feevale.physis.business.session.UserSession;
 import br.feevale.physis.controller.DefaultController;
 import br.feevale.physis.converter.RequestConverter;
 import br.feevale.physis.converter.impl.BeanRequestConverter;
@@ -84,7 +85,11 @@ public class PersonController implements DefaultController {
 			Person person = new Person();
 			person.setId(new Integer(id));
 			
-			personDAO.delete(person);
+			User user = UserSession.getUser(request);
+			
+			if (user.getPerson().getId() < person.getId()) {
+				personDAO.delete(person);
+			}
 		}
 		
 		RequestUtils.redirect(request, response, "person");
