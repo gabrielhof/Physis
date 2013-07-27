@@ -5,7 +5,9 @@
 
 <h1>Treinos</h1>
 
-<f:button label="Novo Treino" controller="training" action="new" styleClass="btn btn-primary pull-right"/>
+<c:if test="${user.role != 'USER'}">
+	<f:button label="Novo Treino" controller="training" action="new" styleClass="btn btn-primary pull-right"/>
+</c:if>
 
 <f:table id="person-table">
 	<thead>
@@ -23,10 +25,19 @@
 					<td>${training.id}</td>
 					<td>${training.name}</td>
 					<td>
-						<f:icon-button icon="icon-pencil" title="Editar" controller="training" action="edit" parameters="id=${training.id}" />
+						<c:choose>
+							<c:when test="${user.role != 'USER'}">
+								<f:icon-button icon="icon-pencil" title="Editar" controller="training" action="edit" parameters="id=${training.id}" />
+							</c:when>
+							<c:otherwise>
+								<f:icon-button icon="icon-eye-open" title="Visualizar" controller="training" action="edit" parameters="id=${training.id}" />
+							</c:otherwise>
+						</c:choose>
 					</td>
 					<td>
-						<f:icon-button icon="icon-trash" title="Remover" controller="training" action="delete" parameters="id=${training.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						<c:if test="${user.role != 'USER'}">
+							<f:icon-button icon="icon-trash" title="Remover" controller="training" action="delete" parameters="id=${training.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>

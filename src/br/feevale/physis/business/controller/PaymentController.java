@@ -1,12 +1,14 @@
 package br.feevale.physis.business.controller;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.jrimum.bopepo.BancosSuportados;
 import org.jrimum.bopepo.Boleto;
 import org.jrimum.bopepo.view.BoletoViewer;
@@ -24,10 +26,13 @@ import org.jrimum.domkee.financeiro.banco.febraban.TipoDeTitulo;
 import org.jrimum.domkee.financeiro.banco.febraban.Titulo;
 
 import br.feevale.physis.business.model.bean.Payment;
+import br.feevale.physis.business.model.bean.Person;
 import br.feevale.physis.business.model.dao.PaymentDAO;
 import br.feevale.physis.business.model.dao.PersonDAO;
+import br.feevale.physis.business.model.enums.Role;
 import br.feevale.physis.controller.CrudController;
 import br.feevale.physis.dao.HibernateDAOImpl;
+import br.feevale.physis.util.RequestUtils;
 import br.feevale.physis.view.View;
 
 public class PaymentController extends CrudController<Payment> {
@@ -38,7 +43,6 @@ public class PaymentController extends CrudController<Payment> {
 	@Resource
 	private PersonDAO personDAO;
 
-	
 	@Override
 	protected HibernateDAOImpl<Payment> getDao() {
 		return paymentDAO;
@@ -71,7 +75,7 @@ public class PaymentController extends CrudController<Payment> {
 
 	@Override
 	protected void buildVariables(View view) throws Exception {
-		view.setVariable("people", personDAO.listAll());
+		view.setVariable("people", personDAO.findFor(Role.USER));
 	}
 
 	protected String generateSlipBank(){
@@ -84,89 +88,106 @@ public class PaymentController extends CrudController<Payment> {
 	}
 
 	public void generateSlipBankAction(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Cedente cedente = new Cedente("PROJETO JRimum", "00.000.208/0001-00");
+		Payment payment = null;
+		
+		String id = request.getParameter("id");
+		if (StringUtils.isNotBlank(id)) {
+			payment = paymentDAO.get(new Integer(id));
+		}
+		
+		if (payment == null) {
+			RequestUtils.redirect(request, response, "payment");
+		}
+		
+		Person person = payment.getPerson();
+		
+		Cedente cedente = new Cedente("Physis", "00.000.208/0001-00");
 
         /*
          * INFORMANDO DADOS SOBRE O SACADO.
          */
-        Sacado sacado = new Sacado("JavaDeveloper Pronto Para Férias", "222.222.222-22");
+        Sacado sacado = new Sacado(String.format("%s %s", person.getName(), person.getLastName()), person.getCpf());
 
-        // Informando o endereço do sacado.
+        // Informando o endereï¿½o do sacado.
         Endereco enderecoSac = new Endereco();
-        enderecoSac.setUF(UnidadeFederativa.RN);
-        enderecoSac.setLocalidade("Natal");
-        enderecoSac.setCep(new CEP("59064-120"));
-        enderecoSac.setBairro("Grande Centro");
-        enderecoSac.setLogradouro("Rua poeta dos programas");
-        enderecoSac.setNumero("1");
+        enderecoSac.setUF(UnidadeFederativa.valueOfSigla(person.getAddress().getState().getValue()));
+        enderecoSac.setLocalidade(person.getAddress().getCity());
+        enderecoSac.setCep(new CEP(person.getAddress().getCep()));
+        enderecoSac.setBairro(person.getAddress().getDistrict());
+        enderecoSac.setLogradouro(person.getAddress().getAddress());
+        enderecoSac.setNumero(person.getAddress().getNumber().toString());
         sacado.addEndereco(enderecoSac);
 
         /*
          * INFORMANDO DADOS SOBRE O SACADOR AVALISTA.
          */
-        SacadorAvalista sacadorAvalista = new SacadorAvalista("JRimum Enterprise", "00.000.000/0001-91");
+        SacadorAvalista sacadorAvalista = new SacadorAvalista("Physis", "00.000.000/0001-91");
 
-        // Informando o endereço do sacador avalista.
+        // Informando o endereï¿½o do sacador avalista.
         Endereco enderecoSacAval = new Endereco();
-        enderecoSacAval.setUF(UnidadeFederativa.DF);
-        enderecoSacAval.setLocalidade("Brasília");
-        enderecoSacAval.setCep(new CEP("59000-000"));
-        enderecoSacAval.setBairro("Grande Centro");
-        enderecoSacAval.setLogradouro("Rua Eternamente Principal");
-        enderecoSacAval.setNumero("001");
+        enderecoSacAval.setUF(UnidadeFederativa.RS);
+        enderecoSacAval.setLocalidade("Novo Hamburgo");
+        enderecoSacAval.setCep(new CEP("93336-220"));
+        enderecoSacAval.setBairro("Ideal");
+        enderecoSacAval.setLogradouro("Rua Marechal CÃ¢mara");
+        enderecoSacAval.setNumero("22");
         sacadorAvalista.addEndereco(enderecoSacAval);
 
         /*
-         * INFORMANDO OS DADOS SOBRE O TÍTULO.
+         * INFORMANDO OS DADOS SOBRE O Tï¿½TULO.
          */
         
-        // Informando dados sobre a conta bancária do título.
+        // Informando dados sobre a conta bancï¿½ria do tï¿½tulo.
         ContaBancaria contaBancaria = new ContaBancaria(BancosSuportados.BANCO_BRADESCO.create());
         contaBancaria.setNumeroDaConta(new NumeroDaConta(123456, "0"));
         contaBancaria.setCarteira(new Carteira(30));
         contaBancaria.setAgencia(new Agencia(1234, "1"));
         
+        Calendar vencimento = Calendar.getInstance();
+        vencimento.setTime(payment.getIssueDate());
+        vencimento.add(Calendar.DATE, 10);
+        
         Titulo titulo = new Titulo(contaBancaria, sacado, cedente, sacadorAvalista);
         titulo.setNumeroDoDocumento("123456");
         titulo.setNossoNumero("99345678912");
         titulo.setDigitoDoNossoNumero("5");
-        titulo.setValor(BigDecimal.valueOf(0.23));
-        titulo.setDataDoDocumento(new Date());
-        titulo.setDataDoVencimento(new Date());
+        titulo.setValor(new BigDecimal(payment.getValue()));
+        titulo.setDataDoDocumento(payment.getIssueDate());
+        titulo.setDataDoVencimento(vencimento.getTime());
         titulo.setTipoDeDocumento(TipoDeTitulo.DM_DUPLICATA_MERCANTIL);
 //        titulo.setAceite(Aceite.A);
-        titulo.setDesconto(new BigDecimal(0.05));
+        titulo.setDesconto(BigDecimal.ZERO);
         titulo.setDeducao(BigDecimal.ZERO);
         titulo.setMora(BigDecimal.ZERO);
         titulo.setAcrecimo(BigDecimal.ZERO);
-        titulo.setValorCobrado(BigDecimal.ZERO);
+        titulo.setValorCobrado(titulo.getValor());
 
         /*
          * INFORMANDO OS DADOS SOBRE O BOLETO.
          */
         Boleto boleto = new Boleto(titulo);
         
-        boleto.setLocalPagamento("Pagável preferencialmente na Rede X ou em " +
-                        "qualquer Banco até o Vencimento.");
+        boleto.setLocalPagamento("Pagï¿½vel preferencialmente na Rede X ou em " +
+                        "qualquer Banco atï¿½ o Vencimento.");
         boleto.setInstrucaoAoSacado("Senhor sacado, sabemos sim que o valor " +
-                        "cobrado não é o esperado, aproveite o DESCONTÃO!");
-        boleto.setInstrucao1("PARA PAGAMENTO 1 até Hoje não cobrar nada!");
-        boleto.setInstrucao2("PARA PAGAMENTO 2 até Amanhã Não cobre!");
-        boleto.setInstrucao3("PARA PAGAMENTO 3 até Depois de amanhã, OK, não cobre.");
-        boleto.setInstrucao4("PARA PAGAMENTO 4 até 04/xx/xxxx de 4 dias atrás COBRAR O VALOR DE: R$ 01,00");
-        boleto.setInstrucao5("PARA PAGAMENTO 5 até 05/xx/xxxx COBRAR O VALOR DE: R$ 02,00");
-        boleto.setInstrucao6("PARA PAGAMENTO 6 até 06/xx/xxxx COBRAR O VALOR DE: R$ 03,00");
-        boleto.setInstrucao7("PARA PAGAMENTO 7 até xx/xx/xxxx COBRAR O VALOR QUE VOCÊ QUISER!");
-        boleto.setInstrucao8("APÓS o Vencimento, Pagável Somente na Rede X.");
+                        "cobrado nï¿½o ï¿½ o esperado, aproveite o DESCONTï¿½O!");
+        boleto.setInstrucao1("PARA PAGAMENTO 1 atï¿½ Hoje nï¿½o cobrar nada!");
+        boleto.setInstrucao2("PARA PAGAMENTO 2 atï¿½ Amanhï¿½ Nï¿½o cobre!");
+        boleto.setInstrucao3("PARA PAGAMENTO 3 atï¿½ Depois de amanhï¿½, OK, nï¿½o cobre.");
+        boleto.setInstrucao4("PARA PAGAMENTO 4 atï¿½ 04/xx/xxxx de 4 dias atrï¿½s COBRAR O VALOR DE: R$ 01,00");
+        boleto.setInstrucao5("PARA PAGAMENTO 5 atï¿½ 05/xx/xxxx COBRAR O VALOR DE: R$ 02,00");
+        boleto.setInstrucao6("PARA PAGAMENTO 6 atï¿½ 06/xx/xxxx COBRAR O VALOR DE: R$ 03,00");
+        boleto.setInstrucao7("PARA PAGAMENTO 7 atï¿½ xx/xx/xxxx COBRAR O VALOR QUE VOCï¿½ QUISER!");
+        boleto.setInstrucao8("APï¿½S o Vencimento, Pagï¿½vel Somente na Rede X.");
 
         /*
-         * GERANDO O BOLETO BANCÁRIO.
+         * GERANDO O BOLETO BANCï¿½RIO.
          */
-        // Instanciando um objeto "BoletoViewer", classe responsável pela
-        // geração do boleto bancário.
+        // Instanciando um objeto "BoletoViewer", classe responsï¿½vel pela
+        // geraï¿½ï¿½o do boleto bancï¿½rio.
         BoletoViewer boletoViewer = new BoletoViewer(boleto);
 
-        // Gerando o arquivo. No caso o arquivo mencionado será salvo na mesma
+        // Gerando o arquivo. No caso o arquivo mencionado serï¿½ salvo na mesma
         // pasta do projeto. Outros exemplos:
         // WINDOWS: boletoViewer.getAsPDF("C:/Temp/MeuBoleto.pdf");
         // LINUX: boletoViewer.getAsPDF("/home/temp/MeuBoleto.pdf");

@@ -3,6 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
+<c:set var="isNotUser" value="${user.role != 'USER'}" />
+
+<script type="text/javascript">var canSave = ${isNotUser};</script>
+
 <h1><f:case when="${empty training.id}" then="Novo Treino" otherwise="Editar Treino"/></h1>
 
 <f:form controller="training" action="save" method="post" validation="validateTrainingForm">
@@ -12,7 +16,9 @@
 	</f:fieldset>
 
 	<f:fieldset title="Exercícios">
-		<f:button label="Adicionar Exercício" styleClass="btn btn-primary pull-right" onclick="return addExerciseAction();"/>
+		<c:if test="${isNotUser}">
+			<f:button label="Adicionar Exercício" styleClass="btn btn-primary pull-right" onclick="return addExerciseAction();"/>
+		</c:if>
 		
 		<f:table id="training-exercise-table">
 			<thead>
@@ -47,14 +53,18 @@
 								<f:input id="training.trainingExercises.trainingExercise.weight" type="hidden" value="${trainingExercise.weight}"/>
 							</td>
 							<td>
-								<a title="Editar" href="javascript:void(0);" class="edit-training-exercise">
-									<i class="icon-pencil"></i>
-								</a>
+								<c:if test="${isNotUser}">
+									<a title="Editar" href="javascript:void(0);" class="edit-training-exercise">
+										<i class="icon-pencil"></i>
+									</a>
+								</c:if>
 							</td>
 							<td>
-								<a title="Remover" href="javascript:void(0);" class="remove-training-exercise">
-									<i class="icon-trash"></i>
-								</a>
+								<c:if test="${isNotUser}">
+									<a title="Remover" href="javascript:void(0);" class="remove-training-exercise">
+										<i class="icon-trash"></i>
+									</a>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>
@@ -64,8 +74,15 @@
 	</f:fieldset>
 
 	<f:buttonset>
-		<f:button label="Salvar" submit="true" styleClass="btn btn-primary"/>
-		<f:button label="Cancelar" controller="training" action="" onclick="return confirmDialog(this, 'Tem certeza que deseja cancelar esse registro?', 'Deseja cancelar?');" />
+		<c:choose>
+			<c:when test="${isNotUser}">
+				<f:button label="Salvar" submit="true" styleClass="btn btn-primary"/>
+				<f:button label="Cancelar" controller="training" action="" onclick="return confirmDialog(this, 'Tem certeza que deseja cancelar esse registro?', 'Deseja cancelar?');" />
+			</c:when>
+			<c:otherwise>
+				<f:button label="Voltar" controller="training" action="" />
+			</c:otherwise>
+		</c:choose>
 	</f:buttonset>
 </f:form>
 

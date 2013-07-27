@@ -6,6 +6,10 @@ function loadView() {
 }
 
 function validateTrainingForm(form) {
+	if (!canSave) {
+		return false;
+	}
+	
 	form = $(form);
 	return hasExercises();
 }

@@ -3,9 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://feevale.br/ui" prefix="f" %>
 
+<c:set var="isNotUser" value="${user.role != 'USER'}" />
+
 <h1>Avaliações</h1>
 
-<f:button label="Nova Avaliação" controller="evaluation" action="new" styleClass="btn btn-primary pull-right"/>
+<c:if test="isNotUser">
+	<f:button label="Nova Avaliação" controller="evaluation" action="new" styleClass="btn btn-primary pull-right"/>
+</c:if>
 
 <f:table id="evaluation-table">
 	<thead>
@@ -40,10 +44,14 @@
 					</td>
 					
 					<td>
-						<f:icon-button icon="icon-pencil" title="Editar" controller="evaluation" action="edit" parameters="id=${evaluation.id}" />
+						<c:if test="isNotUser">
+							<f:icon-button icon="icon-pencil" title="Editar" controller="evaluation" action="edit" parameters="id=${evaluation.id}" />
+						</c:if>
 					</td>
 					<td>
-						<f:icon-button icon="icon-trash" title="Remover" controller="evaluation" action="delete" parameters="id=${evaluation.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						<c:if test="isNotUser">
+							<f:icon-button icon="icon-trash" title="Remover" controller="evaluation" action="delete" parameters="id=${evaluation.id}" onclick="return confirmDialog(this, 'Term certeza que deseja excluir esse registro?', 'Deseja excluir?', true);"/>
+						</c:if>
 					</td>
 				</tr>
 			</c:forEach>

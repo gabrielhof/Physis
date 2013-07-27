@@ -5,7 +5,6 @@
 
 <h1>Pagamentos</h1>
 
-<f:button label="Gera Boleto" controller="payment" action="generateSlipBank" styleClass="btn btn-primary pull-right"/>
 <f:button label="Novo Pagamento" controller="payment" action="new" styleClass="btn btn-primary pull-right"/>
 
 <f:table id="payment-table">
@@ -13,8 +12,8 @@
 		<tr>
 			<th>ID</th>
 			<th>Data de emissão</th>
-			<th>Data de pagamento</th>
 			<th>Valor</th>
+			<th>Data de pagamento</th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -24,9 +23,9 @@
 			<c:forEach var="payment" items="${payments}">
 				<tr>
 					<td>${payment.id}</td>
-					<td>${payment.issueDate}</td>
-					<td>${payment.paymentDate}</td>
+					<td><fmt:formatDate value="${payment.issueDate}" pattern="dd/MM/yyyy"/></td>
 					<td>${payment.value}</td>
+					<td><fmt:formatDate value="${payment.paymentDate}" pattern="dd/MM/yyyy"/></td>
 <%-- 					<td>${payment.person.name}</td> --%>
 					<td>
 						<f:icon-button icon="icon-pencil" title="Editar" controller="payment" action="edit" parameters="id=${payment.id}" />

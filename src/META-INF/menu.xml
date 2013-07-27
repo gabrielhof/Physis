@@ -2,17 +2,16 @@
 <menu>
 	<menus>
 		<menu name="Home" controller="home" action="" />
-		<menu name="Pessoas" controller="person" action="" role="ADMIN">
+		<menu name="Administrativo" controller="person" action="" role="ADMIN">
 			<menus>
 				<menu name="Pessoas Cadastradas" controller="person" action="" role="ADMIN" />
-				<menu name="Nova Pessoa" controller="person" action="new" role="ADMIN" />
+				<menu name="Pagamentos" controller="payment" action="" role="ADMIN" />
 			</menus>
 		</menu>
-		<menu name="Pessoas" controller="person" action="" role="PROFESSOR">
+		<menu name="Administrativo" controller="person" action="" role="PROFESSOR">
 			<menus>
 				<menu name="Pessoas Cadastradas" controller="person" action="" role="PROFESSOR" />
-				<menu name="Nova Pessoa" controller="person" action="new" role="PROFESSOR" />
-				
+				<menu name="Pagamentos" controller="payment" action="" role="PROFESSOR" />
 			</menus>
 		</menu>
 		<menu name="Treinos" controller="training" action="">
