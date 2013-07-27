@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Example;
@@ -29,7 +30,7 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 		
 		Transaction t = session.beginTransaction();
 		try {
-			session.saveOrUpdate(bean);
+			session.merge(bean);
 			session.flush();
 			t.commit();
 		} catch (Exception e) {
@@ -75,8 +76,9 @@ public abstract class HibernateDAOImpl<T extends Bean> implements GenericDAO<T> 
 	@SuppressWarnings("unchecked")
 	public List<T> listAll() throws Exception {
 		Session session = getHibernateSession();
-		Criteria criteria = session.createCriteria(getBeanClass());
-		List<T> list = criteria.list();
+		
+		Query query = session.createQuery(String.format("select bean from %s as bean group by bean.id", getBeanClass().getSimpleName()));
+		List<T> list = query.list();
 		
 		session.close();
 		

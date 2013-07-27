@@ -5,7 +5,7 @@
 
 <h1><f:case when="${empty training.id}" then="Novo Treino" otherwise="Editar Treino"/></h1>
 
-<f:form controller="training" action="save" method="post" validation="defaultFormValidation">
+<f:form controller="training" action="save" method="post" validation="validateTrainingForm">
 	<f:fieldset title="Dados Gerais">
 		<f:input id="training.id" type="hidden" value="${training.id}" />
 		<f:field label="Nome" type="text" id="training.name" required="true" value="${training.name}"/>
@@ -75,6 +75,7 @@
 		<h3 id="modal-title"></h3>
 	</div>
 	<div class="modal-body">
+		<div class="alert hide"></div>
 		<form id="training-exercise-form" class="form-horizontal" onsubmit="">
 			<f:input id="id" type="hidden" />
 			

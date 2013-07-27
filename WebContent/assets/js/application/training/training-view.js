@@ -1,16 +1,23 @@
 var currentRow = null;
 
-loadTrainingExercise();
+function loadView() {
+	$(".edit-training-exercise").click(editExerciseAction);
+	$(".remove-training-exercise").click(removeExerciseAction);
+}
 
-function loadTrainingExercise() {
-	if (typeof($) != "undefined") {
-		$(document).ready(function() {
-			$(".edit-training-exercise").click(editExerciseAction);
-			$(".remove-training-exercise").click(removeExerciseAction);
-		});
-	} else {
-		setTimeout(loadTrainingExercise, 500);
+function validateTrainingForm(form) {
+	form = $(form);
+	return hasExercises();
+}
+
+function hasExercises() {
+	var trs = $("#training-exercise-table tbody tr");
+	if (trs.length <= 0) {
+		error("É necessário adicionar ao menos um exercício.");
+		return false;
 	}
+	
+	return true;
 }
 
 function addExerciseAction() {
@@ -31,6 +38,9 @@ function onExerciseDialogHide() {
 
 function saveExerciseAction() {
 	var form = $("form#training-exercise-form");
+	if (!defaultFormValidation(form[0])) {
+		return;
+	}
 	
 	var id = form.find("#id").val();
 	var isEdit = currentRow != null;

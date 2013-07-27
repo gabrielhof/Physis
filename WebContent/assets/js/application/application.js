@@ -13,6 +13,10 @@ function onDocumentReady() {
 	transformPrettySelect();
 	
 	$("input.error").change(removeErrorFieldAction);
+	
+	if (typeof(loadView) == "function") {
+		loadView();
+	}
 }
 
 function transformDateFields() {
